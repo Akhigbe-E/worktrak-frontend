@@ -15,13 +15,15 @@ export const handleLoginButtonClick = (
   dispatch(setJustClickedButton(true));
   loginRequest({ email, password })
     .then(({ success, message, data }) => {
-      window.localStorage.setItem("token", data);
       dispatch(setAlertModal({ success, visible: true, message }));
       setTimeout(() => {
         dispatch(setAlertModal({ success, visible: false, message: "" }));
-      }, 3000);
+      }, 2000);
       dispatch(setJustClickedButton(false));
-      history.push(DASHBOARD);
+      if (success) {
+        window.localStorage.setItem("token", data);
+        history.push(DASHBOARD);
+      }
     })
     .catch((e) => {
       dispatch(
@@ -37,6 +39,6 @@ export const handleLoginButtonClick = (
         dispatch(
           setAlertModal({ success: false, visible: false, message: "" })
         );
-      }, 3000);
+      }, 2000);
     });
 };

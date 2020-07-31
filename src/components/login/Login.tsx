@@ -96,7 +96,7 @@ const Login: React.FC = () => {
                     : `bg-customGreen-300`
                 }`}
               >
-                LOGIN
+                {justClickedButton ? "Loading..." : "LOGIN"}
               </button>
             </form>
           </div>
