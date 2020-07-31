@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 
 // Pictures
 import AuthImage from "../../assets/images/authImage.svg";
 import LogoImage from "../../assets/images/logo.svg";
+import { handleLoginButtonClick } from "./loginFunctions";
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../app/store";
 
 const Login: React.FC = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const [inputtedEmail, setInputtedEmail] = useState("");
+  const [inputtedPassword, setInputtedPassword] = useState("");
+
+  const justClickedButton = useSelector(
+    (state: RootState) => state.justClickedButton
+  );
   return (
     <div
       className="mx-auto md:flex h-screen align-middle justify-center items-center"
@@ -42,7 +55,11 @@ const Login: React.FC = () => {
                   Email
                 </label>
                 <input
-                  type="text"
+                  type="email"
+                  value={inputtedEmail}
+                  onChange={(e) => {
+                    setInputtedEmail(e.target.value);
+                  }}
                   className="w-full border border-gray-400 rounded-lg block p-3"
                 />
               </div>
@@ -54,11 +71,31 @@ const Login: React.FC = () => {
                   Password
                 </label>
                 <input
-                  type="text"
+                  type="password"
+                  value={inputtedPassword}
+                  onChange={(e) => {
+                    setInputtedPassword(e.target.value);
+                  }}
                   className="w-full border border-gray-400 rounded-lg block p-3"
                 />
               </div>
-              <button className="w-full border py-3  text-white font-bold bg-customGreen-100 border-customGreen-200 rounded-md ">
+              <button
+                onClick={(e) => {
+                  handleLoginButtonClick(
+                    e,
+                    inputtedEmail,
+                    inputtedPassword,
+                    history,
+                    dispatch
+                  );
+                }}
+                disabled={justClickedButton}
+                className={`w-full border py-3  text-white font-bold border-customGreen-200 rounded-md ${
+                  justClickedButton
+                    ? `bg-customGreen-100`
+                    : `bg-customGreen-300`
+                }`}
+              >
                 LOGIN
               </button>
             </form>
