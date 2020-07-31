@@ -18,6 +18,11 @@ module.exports = {
       black: '#000',
       white: '#fff',
 
+      customGreen: {
+        100: '#69F0AE',
+        200: '#56DE9C'
+      },
+
       gray: {
         100: '#f7fafc',
         200: '#edf2f7',
