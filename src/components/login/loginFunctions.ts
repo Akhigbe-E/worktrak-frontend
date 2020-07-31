@@ -15,6 +15,7 @@ export const handleLoginButtonClick = (
   dispatch(setJustClickedButton(true));
   loginRequest({ email, password })
     .then(({ success, message, data }) => {
+      console.log(success);
       dispatch(setAlertModal({ success, visible: true, message }));
       setTimeout(() => {
         dispatch(setAlertModal({ success, visible: false, message: "" }));

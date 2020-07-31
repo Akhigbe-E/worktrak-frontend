@@ -10,6 +10,41 @@ export interface LoginReturnType {
   data: string;
 }
 
+export interface TeamDataType {
+  id: string;
+  name: string;
+  description: string;
+}
+
+export interface GetTeamRequestReturnType {
+  success: boolean;
+  data: Array<TeamDataType>;
+}
+
+export const customFetchGet = async (endpoint: string) => {
+  return await (
+    await fetch(`${HOST}${endpoint}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: window.localStorage.getItem("token") || "",
+      },
+    })
+  ).json();
+};
+export const customFetchPost = async (endpoint: string, body: any) => {
+  return await (
+    await fetch(`${HOST}${endpoint}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: window.localStorage.getItem("token") || "",
+      },
+      body: JSON.stringify({ ...body }),
+    })
+  ).json();
+};
+
 export const loginRequest = async (
   body: LoginBodyType
 ): Promise<LoginReturnType> => {
@@ -23,3 +58,7 @@ export const loginRequest = async (
     })
   ).json();
 };
+
+export const getTeamsRequest = (
+  endpoint: string
+): Promise<GetTeamRequestReturnType> => customFetchGet("/teams");

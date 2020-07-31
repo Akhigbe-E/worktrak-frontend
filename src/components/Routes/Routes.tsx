@@ -2,12 +2,13 @@ import React from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 // Util
-import { DASHBOARD, LOGIN } from "../../util/allEndpoints";
+import { DASHBOARD, LOGIN, SETUPTEAM } from "../../util/allEndpoints";
 
 // Components
 import Login from "../login/Login";
 import ProtectedRoute from "./ProtectedRoutes";
 import Dashboard from "../dashboard/Dashboard";
+import SetupTeam from "../setupTeam/SetupTeam";
 
 const Routes: React.FC = () => {
   return (
@@ -18,6 +19,7 @@ const Routes: React.FC = () => {
           <ProtectedRoute>
             <>
               <Route path={DASHBOARD} component={Dashboard} />
+              <Route path={SETUPTEAM} component={SetupTeam} />
             </>
           </ProtectedRoute>
         </Switch>

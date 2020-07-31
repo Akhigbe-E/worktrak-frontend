@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import alertModalReducer from "./slices/alertModalSlice";
 import justClickedButtonReducer from "./slices/justClickedButtonSlice";
+import teamsReducer from "./slices/teamsSlice";
 
 const store = configureStore({
   reducer: {
     alertModal: alertModalReducer,
     justClickedButton: justClickedButtonReducer,
+    teams: teamsReducer,
   },
 });
 
