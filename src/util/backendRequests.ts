@@ -4,7 +4,7 @@ export interface LoginBodyType {
   email: string;
   password: string;
 }
-export interface LoginReturnType {
+export interface ReturnType {
   success: boolean;
   message: string;
   data: string;
@@ -19,6 +19,11 @@ export interface TeamDataType {
 export interface GetTeamRequestReturnType {
   success: boolean;
   data: Array<TeamDataType>;
+}
+
+export interface CreateTeamRequestBodyType {
+  name: string;
+  description?: string;
 }
 
 export const customFetchGet = async (endpoint: string) => {
@@ -47,7 +52,7 @@ export const customFetchPost = async (endpoint: string, body: any) => {
 
 export const loginRequest = async (
   body: LoginBodyType
-): Promise<LoginReturnType> => {
+): Promise<ReturnType> => {
   return await (
     await fetch(`${HOST}/login`, {
       method: "POST",
@@ -62,3 +67,9 @@ export const loginRequest = async (
 export const getTeamsRequest = (
   endpoint: string
 ): Promise<GetTeamRequestReturnType> => customFetchGet("/teams");
+
+export const createTeamsRequest = ({
+  name,
+  description,
+}: CreateTeamRequestBodyType): Promise<ReturnType> =>
+  customFetchPost("/team", { name });

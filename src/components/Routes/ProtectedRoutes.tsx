@@ -15,22 +15,20 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
 }) => {
   return (
     <>
-      <Layout>
-        <Route
-          render={({ location }) =>
-            isAuthenticated() ? (
-              children
-            ) : (
-              <Redirect
-                to={{
-                  pathname: LOGIN,
-                  state: { from: location },
-                }}
-              />
-            )
-          }
-        />
-      </Layout>
+      <Route
+        render={({ location }) =>
+          isAuthenticated() ? (
+            children
+          ) : (
+            <Redirect
+              to={{
+                pathname: LOGIN,
+                state: { from: location },
+              }}
+            />
+          )
+        }
+      />
     </>
   );
 };
