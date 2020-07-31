@@ -10,6 +10,7 @@ import ProtectedRoute from "./ProtectedRoutes";
 import Dashboard from "../dashboard/Dashboard";
 import SetupTeam from "../setupTeam/SetupTeam";
 import FirstScreen from "../FirstScreen/FirstScreen";
+import Layout from "../layout/Layout";
 
 const Routes: React.FC = () => {
   return (
@@ -23,6 +24,9 @@ const Routes: React.FC = () => {
               <FirstScreen>
                 <Route path={DASHBOARD} component={Dashboard} />
               </FirstScreen>
+              <Layout>
+                <></>
+              </Layout>
             </>
           </ProtectedRoute>
         </Switch>
