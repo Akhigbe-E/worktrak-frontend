@@ -7,17 +7,27 @@ import AssignedTasksIcon from "../../assets/images/assignedTasksIcon.svg";
 import AddTeamIcon from "../../assets/images/addTeam.svg";
 import { Link, NavLink } from "react-router-dom";
 import { DASHBOARD } from "../../util/allEndpoints";
-import { getTeamsRequest } from "../../util/backendRequests";
+import {
+  getTeamsRequest,
+  getJoinedTeamsRequest,
+} from "../../util/backendRequests";
 import { setTeams } from "../../app/slices/teamsSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../app/store";
 
 const SideBar: React.FC = () => {
+  const dispatch = useDispatch();
+
+  const teams = useSelector((state: RootState) => state.teams);
+
   useEffect(() => {
     //   get all teams
     getTeamsRequest().then(({ data }) => {
       console.log(data);
-      //   setTeams(data);
+      // dispatch(setTeams(data));
     });
     // get all joined teams from all teams
+    // getJoinedTeamsRequest()
     // Get projects done by those teams
   }, []);
   const renderTeamsWithNestedProjects = () => {

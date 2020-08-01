@@ -22,8 +22,9 @@ const FirstScreen: React.FC<FirstScreenPropType> = ({ children }) => {
 
   useEffect(() => {
     setIsLoading(true);
-    getTeamsRequest().then(({ data }) => {
-      dispatch(setTeams(data));
+    getTeamsRequest().then((data) => {
+      console.log(data);
+      // dispatch(setTeams(data));
       setIsLoading(false);
     });
   }, []);

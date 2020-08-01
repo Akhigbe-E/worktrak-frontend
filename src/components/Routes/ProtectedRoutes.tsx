@@ -17,6 +17,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
     <>
       <Route
         render={({ location }) =>
+          // Dispatch Decoded data to store
           isAuthenticated() ? (
             children
           ) : (

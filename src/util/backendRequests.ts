@@ -34,6 +34,7 @@ const customFetchGet = async (endpoint: string) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        useremail: window.localStorage.getItem("email") || "",
         Authorization: window.localStorage.getItem("token") || "",
       },
     })
@@ -45,6 +46,7 @@ const customFetchPost = async (endpoint: string, body: any) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        useremail: window.localStorage.getItem("email") || "",
         Authorization: window.localStorage.getItem("token") || "",
       },
       body: JSON.stringify({ ...body }),
