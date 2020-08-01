@@ -4,6 +4,7 @@ import alertModalReducer from "./slices/alertModalSlice";
 import justClickedButtonReducer from "./slices/justClickedButtonSlice";
 import teamsReducer from "./slices/teamsSlice";
 import joinedTeamsReducer from "./slices/joinedTeamsSlice";
+import teamProjectsReducer from "./slices/teamProjectsSlice";
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     justClickedButton: justClickedButtonReducer,
     teams: teamsReducer,
     joinedTeams: joinedTeamsReducer,
+    teamProjects: teamProjectsReducer,
   },
 });
 

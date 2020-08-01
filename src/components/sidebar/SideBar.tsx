@@ -5,6 +5,8 @@ import WhiteLogoImage from "../../assets/images/whiteLogo.svg";
 import DashboardIcon from "../../assets/images/dashboardIcon.svg";
 import AssignedTasksIcon from "../../assets/images/assignedTasksIcon.svg";
 import AddTeamIcon from "../../assets/images/addTeam.svg";
+import TeamIcon from "../../assets/images/teamIcon.svg";
+
 import { Link, NavLink } from "react-router-dom";
 import { DASHBOARD } from "../../util/allEndpoints";
 import {
@@ -15,26 +17,112 @@ import { setTeams } from "../../app/slices/teamsSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../app/store";
 import { setJoinedTeams } from "../../app/slices/joinedTeamsSlice";
+import { setTeamProjects } from "../../app/slices/teamProjectsSlice";
+import { TeamsType } from "../FirstScreen/FirstScreen";
+
+export interface JoinedTeamsType {
+  team_id: number;
+  name: string;
+  project_id: string;
+}
 
 const SideBar: React.FC = () => {
   const dispatch = useDispatch();
 
-  const teams = useSelector((state: RootState) => state.teams);
+  const teams: TeamsType = useSelector((state: RootState) => state.teams);
+  const joinedTeams: number[] = useSelector(
+    (state: RootState) => state.joinedTeams
+  );
+  const teamProjects: JoinedTeamsType[] = useSelector(
+    (state: RootState) => state.teamProjects
+  );
 
   useEffect(() => {
     //   get all teams
     getTeamsRequest().then(({ data }) => {
-      // console.log(data);
       dispatch(setTeams(data));
     });
+
     // get all joined teams from all teams
     const useremail = window.localStorage.getItem("email") || "";
-    getJoinedTeamsRequest(useremail).then(({ data }) => {
-      dispatch(setJoinedTeams(data.teamIDs));
-    });
+    getJoinedTeamsRequest(useremail).then(
+      ({ data: { teamIDs, teamProjects } }) => {
+        dispatch(setJoinedTeams(teamIDs));
+        dispatch(setTeamProjects(teamProjects));
+      }
+    );
   }, []);
   const renderTeamsWithNestedProjects = () => {
-    return <div></div>;
+    return (
+      <div>
+        {Object.keys(teams)
+          .filter((id) => joinedTeams.includes(parseInt(id, 10)))
+          .map((teamIndex, index) => {
+            return (
+              <li className="text-xl mb-6 list-none">
+                <NavLink
+                  className={"w-full flex text-base py-2 pl-6  text-white "}
+                  activeClassName="bg-opacity-50 bg-black"
+                  to={`/team/${teamIndex}`}
+                >
+                  <span
+                    className="inline-block mr-3 align-middle items-center"
+                    style={{ marginTop: "0.1rem" }}
+                  >
+                    <img src={TeamIcon} alt="active team" />
+                  </span>
+                  <p className="inline-block align-middle items-center">
+                    {teams[teamIndex].name}
+                  </p>
+                </NavLink>
+                <div>
+                  {
+                    // teamProjects
+                    //   .filter(
+                    //     ({ team_id }) => team_id === parseInt(teamIndex, 10)
+                    //   )
+                    [{ name: "Make adverts", project_id: 9 }].map(
+                      ({ name, project_id }, index) => {
+                        return (
+                          <NavLink
+                            to={`/project/${project_id}`}
+                            className="text-sm font-hairline py-2 pl-12 block text-white"
+                            activeClassName="bg-opacity-50 bg-black"
+                          >
+                            <span
+                              className={`inline-block h-2 w-2 mr-3 rounded-lg ${
+                                window.location.pathname ===
+                                "/project/" + project_id
+                                  ? "bg-teal-400"
+                                  : "bg-teal-400"
+                              }`}
+                            ></span>
+                            {name.substr(0, 20)}
+                            {name.length > 20 && "..."}
+                          </NavLink>
+                        );
+                      }
+                    )
+                  }
+                </div>
+                {/* {[{ name: 'Develop Proflow' }, { name: 'Develop Proflow' }, { name: 'Develop Proflow' }, { name: 'Develop Proflow' }].length > 3 && showMoreProjects[index] === undefined && < button className="text-xs font-semibold py-0 pl-16 text-white" onClick={() => { setShowMoreProjects({ ...showMoreProjects, [index]: true }) }}>Show more projects</button>} */}
+                {/* {teamProjects.filter(
+                  ({ team_id }) => team_id === parseInt(teamIndex, 10)
+                ).length === 0 && (
+                  <div
+                    onClick={() => {
+                      dispatch(openAddProjectModal());
+                    }}
+                    className=" cursor-pointer text-base pl-12 text-white"
+                  >
+                    + Create Project
+                  </div>
+                )} */}
+              </li>
+            );
+          })}
+      </div>
+    );
   };
 
   return (
@@ -72,10 +160,10 @@ const SideBar: React.FC = () => {
           </span>
         </NavLink>
       </div>
-      <div className="pl-6 mt-3">
-        <span className="flex mb-5">
+      <div className="mt-3">
+        <span className="flex mb-3">
           <p
-            className="text-base text-gray-200 w-3/6 font-hairline align-middle"
+            className="text-base pl-6 text-gray-200 w-3/6 font-hairline align-middle"
             style={{ letterSpacing: "0.2rem" }}
           >
             TEAMS
