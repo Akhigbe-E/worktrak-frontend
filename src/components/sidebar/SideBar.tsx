@@ -76,48 +76,48 @@ const SideBar: React.FC = () => {
                   </p>
                 </NavLink>
                 <div>
-                  {
-                    // teamProjects
-                    //   .filter(
-                    //     ({ team_id }) => team_id === parseInt(teamIndex, 10)
-                    //   )
-                    [{ name: "Make adverts", project_id: 9 }].map(
-                      ({ name, project_id }, index) => {
-                        return (
-                          <NavLink
-                            to={`/project/${project_id}`}
-                            className="text-sm font-hairline py-2 pl-12 block text-white"
-                            activeClassName="bg-opacity-50 bg-black"
-                          >
-                            <span
-                              className={`inline-block h-2 w-2 mr-3 rounded-lg ${
-                                window.location.pathname ===
-                                "/project/" + project_id
-                                  ? "bg-teal-400"
-                                  : "bg-teal-400"
-                              }`}
-                            ></span>
-                            {name.substr(0, 20)}
-                            {name.length > 20 && "..."}
-                          </NavLink>
-                        );
-                      }
+                  {teamProjects
+                    .filter(
+                      ({ team_id }) => team_id === parseInt(teamIndex, 10)
                     )
-                  }
+                    // [
+                    //   { name: "Make adverts", project_id: 9 },
+                    //   { name: "Make Items", project_id: 10 },
+                    // ]
+                    .map(({ name, project_id }, index) => {
+                      return (
+                        <NavLink
+                          to={`/project/${project_id}`}
+                          className="text-sm font-hairline py-1 pl-10 block text-white"
+                          activeClassName="bg-opacity-50 bg-black"
+                        >
+                          <span
+                            className={`inline-block mr-3 rounded-lg ${
+                              window.location.pathname ===
+                              "/project/" + project_id
+                                ? "bg-teal-400"
+                                : "bg-teal-400"
+                            }`}
+                            style={{ width: "0.7rem", height: "0.7rem" }}
+                          ></span>
+                          {name.substr(0, 20)}
+                          {name.length > 20 && "..."}
+                        </NavLink>
+                      );
+                    })}
                 </div>
-                {/* {[{ name: 'Develop Proflow' }, { name: 'Develop Proflow' }, { name: 'Develop Proflow' }, { name: 'Develop Proflow' }].length > 3 && showMoreProjects[index] === undefined && < button className="text-xs font-semibold py-0 pl-16 text-white" onClick={() => { setShowMoreProjects({ ...showMoreProjects, [index]: true }) }}>Show more projects</button>} */}
-                {/* {teamProjects.filter(
+                {teamProjects.filter(
                   ({ team_id }) => team_id === parseInt(teamIndex, 10)
                 ).length === 0 && (
                   <div
                     onClick={() => {
-                      dispatch(openAddProjectModal());
+                      // dispatch(openAddProjectModal());
                     }}
-                    className=" cursor-pointer text-base pl-12 text-white"
+                    className=" cursor-pointer text-sm font-thin pl-12 text-white"
                   >
                     + Create Project
                   </div>
-                )} */}
+                )}
               </li>
             );
           })}
