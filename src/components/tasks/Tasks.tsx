@@ -11,12 +11,10 @@ export interface TasksPropType {
 }
 
 const renderTasks = (tasksData: TasksType) =>
-  //   Object.values(tasksData)
-  [{ id: 1, title: "Test task", completed: true }].map(
-    ({ id, title, completed }) => {
-      return <Task title={title} completed={completed} />;
-    }
-  );
+  // [{ id: 1, title: "Test task", completed: true }]
+  Object.values(tasksData).map(({ id, title, completed }) => {
+    return <Task title={title} completed={completed} />;
+  });
 
 const Tasks: React.FC<TasksPropType> = ({ tasksData }) => {
   return (
@@ -26,7 +24,7 @@ const Tasks: React.FC<TasksPropType> = ({ tasksData }) => {
           No Assigned tasks
           <span role="img" aria-label="empty mailbox" className="ml-1">
             📪
-          </span>{" "}
+          </span>
         </h3>
       ) : (
         renderTasks(tasksData)
