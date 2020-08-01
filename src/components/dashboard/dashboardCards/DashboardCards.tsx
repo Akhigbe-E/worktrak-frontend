@@ -5,16 +5,21 @@ export interface DashboardCardsPropType {
   cardsData: DashboardCardsData[];
 }
 
+const cardColors = ["customGreen-300", "purple-600", "orange-500"];
+
 const DashboardCards: React.FC<DashboardCardsPropType> = ({ cardsData }) => {
   return (
-    <div>
-      {cardsData.map(({ title, value }) => {
+    <div className="flex w-full overflow-x-scroll pb-3">
+      {cardsData.map(({ title, value }, index) => {
         return (
-          <span className="py-4 px-3 rounded-lg w-48">
-            <p className="font-hairline w-full text-left text-sm tracking-wider mb-3 block">
+          <span
+            className={`py-5 px-3 mr-4 rounded-lg text-white bg-${cardColors[index]} block`}
+            style={{ width: "13rem" }}
+          >
+            <p className="font-light w-full text-left text-xs tracking-wider mb-2 block">
               {title}
             </p>
-            <p className="text-lg w-full text-left font-semibold tracking-wider block">
+            <p className=" text-3xl w-full text-left font-medium tracking-wider block">
               {value}
             </p>
           </span>
