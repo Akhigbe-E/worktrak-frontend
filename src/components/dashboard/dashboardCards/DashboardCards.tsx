@@ -12,6 +12,7 @@ const renderCards = (cardsData: DashboardCardsData[], cardColors: string[]) => {
   return cardsData.map(({ title, value }, index) => {
     return (
       <DashboardCard
+        key={index}
         title={title}
         value={value}
         cardColour={cardColors[index]}

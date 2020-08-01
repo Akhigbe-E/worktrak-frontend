@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import SideBar, { JoinedTeamsType } from "../sidebar/SideBar";
+import SideBar from "../sidebar/SideBar";
 import DashboardCards from "./dashboardCards/DashboardCards";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../app/store";
@@ -10,9 +10,22 @@ import { getAssignedTasksRequest } from "../../util/backendRequests";
 import { setAssignedTasks } from "../../app/slices/assignedTasksSlice";
 import Loader from "../loader/Loader";
 
+import AddIcon from "../../assets/images/add.svg";
+import { TeamsType } from "../FirstScreen/FirstScreen";
+
 export interface DashboardCardsData {
   title: string;
   value: number;
+}
+
+export interface ProjectType {
+  project_id: number;
+  team_id: number;
+  name: string;
+  description: string;
+  status: string;
+  creator_email: string;
+  created_at?: Date;
 }
 
 const Dashboard: React.FC = () => {
@@ -22,7 +35,9 @@ const Dashboard: React.FC = () => {
   // Custom state
   const [tasksAreLoading, setTasksAreLoading] = useState(true);
 
-  const teamProjects: JoinedTeamsType[] = useSelector(
+  const teams: TeamsType = useSelector((state: RootState) => state.teams);
+
+  const teamProjects: ProjectType[] = useSelector(
     (state: RootState) => state.teamProjects
   );
   const assignedTasks = useSelector((state: RootState) => state.assignedTasks);
@@ -34,6 +49,45 @@ const Dashboard: React.FC = () => {
       setTasksAreLoading(false);
     });
   }, []);
+
+  const renderOnGoingProjects = (onGoingProjects: ProjectType[]) => {
+    return (
+      // onGoingProjects
+      [
+        {
+          project_id: 1,
+          name: "Make advert",
+          team_id: 10,
+          status: "In progress",
+        },
+        {
+          project_id: 1,
+          name: "Make advert",
+          team_id: 10,
+          status: "In progress",
+        },
+        {
+          project_id: 1,
+          name: "Make advert",
+          team_id: 10,
+          status: "In progress",
+        },
+      ].map(({ project_id, name, team_id, status }, index) => {
+        return (
+          <Link
+            to={`/project/${project_id}`}
+            key={index}
+            className="flex py-2 px-5 font-light text-base hover:bg-customBlue-100 hover:bg-opacity-25"
+          >
+            <span className="w-5/12">{name}</span>
+            <span className="w-3/12">{teams[team_id].name}</span>
+            <span className="w-2/12">{status}</span>
+            <span className="w-2/12 text-right">Action</span>
+          </Link>
+        );
+      })
+    );
+  };
 
   const dashboardCardsData: DashboardCardsData[] = [
     { title: `TASKS YOU'RE ASSIGNED TO`, value: teamProjects.length },
@@ -77,20 +131,34 @@ const Dashboard: React.FC = () => {
         {/* PROJECT TABLE */}
         <div className="mt-6">
           <div className="w-full border border-gray-400 rounded-lg py-4 text-left text-white">
-            <div className="flex align-middle items-center">
-              <h5 className="font-medium mb-3 py-1 pl-3 w-full inline-block">
+            <div className="flex align-middle py-1 px-5 items-center">
+              <h5 className="font-medium mb-3  w-full inline-block">
                 Ongoing Projects
               </h5>
               <span>
-                <img src="" alt="add project" className="w-4 h-4" />
+                <img src={AddIcon} alt="add project" className="w-6 h-6" />
               </span>
             </div>
-            <div className="flex py-2 px-2 text-base bg-customBlue-100">
+            <div className="flex py-2 px-5 font-semibold text-base bg-customBlue-100">
               <span className="w-5/12">Project</span>
               <span className="w-3/12">Team</span>
               <span className="w-2/12">Status</span>
-              <span className="w-2/12">Action</span>
+              <span className="w-2/12 text-right">Action</span>
             </div>
+            {
+              // teamProjects.length ? (
+              renderOnGoingProjects(teamProjects)
+              // ) : (
+              //   <span className="w-full block text-center">
+              //     <h3 className="mx-auto mt-5 font-extrabold text-white opacity-25 inline-block">
+              //       No Ongoing Projects
+              //       <span role="img" aria-label="empty mailbox" className="ml-3">
+              //         📪
+              //       </span>
+              //     </h3>
+              //   </span>
+              // )
+            }
           </div>
           {/* <table className="text-white w-full border border-gray-400 rounded-md text-left">
             <tr className="border border-gray-400">
