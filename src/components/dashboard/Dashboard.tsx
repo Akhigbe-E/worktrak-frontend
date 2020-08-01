@@ -4,11 +4,18 @@ import DashboardCards from "./dashboardCards/DashboardCards";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 
+export interface DashboardCardsData {
+  title: string;
+  value: number;
+}
+
 const Dashboard: React.FC = () => {
   const teamProjects: JoinedTeamsType[] = useSelector(
     (state: RootState) => state.teamProjects
   );
-  console.log(teamProjects.length);
+  const dashboardCardsData: DashboardCardsData[] = [
+    { title: `TASKS YOU'RE ASSIGNED TO`, value: teamProjects.length },
+  ];
   return (
     <div>
       <SideBar />
@@ -20,7 +27,7 @@ const Dashboard: React.FC = () => {
         }}
       >
         <h3 className="font-bold text-white pb-6">Dashboard</h3>
-        <DashboardCards />
+        <DashboardCards cardsData={dashboardCardsData} />
       </div>
     </div>
   );
