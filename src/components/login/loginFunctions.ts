@@ -31,7 +31,7 @@ export const handleLoginButtonClick = (
         setAlertModal({
           success: false,
           visible: true,
-          message: "Wrong username or password",
+          message: "Hmm something is wrong, refresh and try again",
         })
       );
 
