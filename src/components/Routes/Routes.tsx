@@ -2,7 +2,12 @@ import React from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 // Util
-import { DASHBOARD, LOGIN, SETUPTEAM } from "../../util/allEndpoints";
+import {
+  DASHBOARD,
+  LOGIN,
+  SETUPTEAM,
+  ASSIGNEDTASKS,
+} from "../../util/allEndpoints";
 
 // Components
 import Login from "../login/Login";
@@ -11,6 +16,7 @@ import Dashboard from "../dashboard/Dashboard";
 import SetupTeam from "../setupTeam/SetupTeam";
 import FirstScreen from "../FirstScreen/FirstScreen";
 import Layout from "../layout/Layout";
+import AssignedTasks from "../assignedTasks/AssignedTasks";
 
 const Routes: React.FC = () => {
   return (
@@ -24,6 +30,7 @@ const Routes: React.FC = () => {
               <FirstScreen>
                 <Route path={DASHBOARD} component={Dashboard} />
               </FirstScreen>
+              <Route path={ASSIGNEDTASKS} component={AssignedTasks} />
             </>
           </ProtectedRoute>
 
