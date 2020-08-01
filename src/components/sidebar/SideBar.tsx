@@ -4,7 +4,7 @@ import React, { ReactChild, ReactChildren, useEffect } from "react";
 import WhiteLogoImage from "../../assets/images/whiteLogo.svg";
 import DashboardIcon from "../../assets/images/dashboardIcon.svg";
 import AssignedTasksIcon from "../../assets/images/assignedTasksIcon.svg";
-import AddTeamIcon from "../../assets/images/addTeam.svg";
+import AddTeamIcon from "../../assets/images/add.svg";
 import TeamIcon from "../../assets/images/teamIcon.svg";
 
 import { Link, NavLink } from "react-router-dom";
@@ -19,12 +19,7 @@ import { RootState } from "../../app/store";
 import { setJoinedTeams } from "../../app/slices/joinedTeamsSlice";
 import { setTeamProjects } from "../../app/slices/teamProjectsSlice";
 import { TeamsType } from "../FirstScreen/FirstScreen";
-
-export interface JoinedTeamsType {
-  team_id: number;
-  name: string;
-  project_id: string;
-}
+import { ProjectType } from "../dashboard/Dashboard";
 
 const SideBar: React.FC = () => {
   const dispatch = useDispatch();
@@ -33,7 +28,7 @@ const SideBar: React.FC = () => {
   const joinedTeams: number[] = useSelector(
     (state: RootState) => state.joinedTeams
   );
-  const teamProjects: JoinedTeamsType[] = useSelector(
+  const teamProjects: ProjectType[] = useSelector(
     (state: RootState) => state.teamProjects
   );
 
