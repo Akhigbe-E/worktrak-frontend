@@ -59,7 +59,7 @@ const SideBar: React.FC = () => {
           .filter((id) => joinedTeams.includes(parseInt(id, 10)))
           .map((teamIndex, index) => {
             return (
-              <li className="text-xl mb-6 list-none">
+              <li className="text-xl mb-6 list-none" key={index}>
                 <NavLink
                   className={"w-full flex text-base py-2 pl-6  text-white "}
                   activeClassName="bg-opacity-50 bg-black"
@@ -87,6 +87,7 @@ const SideBar: React.FC = () => {
                     .map(({ name, project_id }, index) => {
                       return (
                         <NavLink
+                          key={index}
                           to={`/project/${project_id}`}
                           className="text-sm font-hairline py-1 pl-10 block text-white"
                           activeClassName="bg-opacity-50 bg-black"
