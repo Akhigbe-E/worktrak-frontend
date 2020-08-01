@@ -24,11 +24,12 @@ const Routes: React.FC = () => {
               <FirstScreen>
                 <Route path={DASHBOARD} component={Dashboard} />
               </FirstScreen>
-              <Layout>
-                <></>
-              </Layout>
             </>
           </ProtectedRoute>
+
+          {/* <Layout>
+                <></>
+              </Layout> */}
         </Switch>
       </Router>
     </>
