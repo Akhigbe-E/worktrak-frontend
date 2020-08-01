@@ -51,32 +51,59 @@ const Dashboard: React.FC = () => {
         }}
       >
         <h3 className="font-bold text-white mb-6">Dashboard</h3>
+        {/* DASHBOARD CARDS */}
         <DashboardCards cardsData={dashboardCardsData} />
+        <div className="mt-6 flex">
+          {/* TASKS ASSIGNED */}
+          <div className="w-1/2 pr-10">
+            <span className="flex align-bottom items-baseline justify-between text-white mb-4">
+              <h5 className="align-bottom inline-block  font-medium items-baseline">
+                Tasks assigned
+              </h5>
+              <Link
+                className="align-bottom inline-block underline items-baseline text-sm"
+                to={`/assignedtasks`}
+              >
+                View more
+              </Link>
+            </span>
+            {tasksAreLoading ? <Loader /> : <Tasks tasksData={assignedTasks} />}
+          </div>
+          {/* CHART */}
+          <div className="w-1/2">
+            <div className="border border-gray-400 rounded-lg w-full my-3 py-3"></div>
+          </div>
+        </div>
+        {/* PROJECT TABLE */}
         <div className="mt-6">
-          <div className="flex">
-            <div className="w-1/2 pr-10">
-              {/* TASKS ASSIGNED */}
-              <span className="flex align-bottom items-baseline justify-between text-white mb-4">
-                <h5 className="align-bottom inline-block  font-medium items-baseline">
-                  Tasks assigned
-                </h5>
-                <Link
-                  className="align-bottom inline-block underline items-baseline text-sm"
-                  to={`/assignedtasks`}
-                >
-                  View more
-                </Link>
+          <div className="w-full border border-gray-400 rounded-lg py-4 text-left text-white">
+            <div className="flex align-middle items-center">
+              <h5 className="font-medium mb-3 py-1 pl-3 w-full inline-block">
+                Ongoing Projects
+              </h5>
+              <span>
+                <img src="" alt="add project" className="w-4 h-4" />
               </span>
-              {tasksAreLoading ? (
-                <Loader />
-              ) : (
-                <Tasks tasksData={assignedTasks} />
-              )}
             </div>
-            <div className="w-1/2">
-              <div className="border border-gray-400 rounded-lg w-full my-3 py-3"></div>
+            <div className="flex py-2 px-2 text-base bg-customBlue-100">
+              <span className="w-5/12">Project</span>
+              <span className="w-3/12">Team</span>
+              <span className="w-2/12">Status</span>
+              <span className="w-2/12">Action</span>
             </div>
           </div>
+          {/* <table className="text-white w-full border border-gray-400 rounded-md text-left">
+            <tr className="border border-gray-400">
+              <th>
+              </th>
+            </tr>
+            <tr>
+              <th>Project</th>
+              <th>Team</th>
+              <th>Staus</th>
+              <th>Actions</th>
+            </tr>
+          </table> */}
         </div>
       </div>
     </div>
