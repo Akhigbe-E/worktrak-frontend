@@ -22,7 +22,7 @@ const Tasks: React.FC<TasksPropType> = ({ tasksData }) => {
       {Object.values(tasksData).length < 1 ? (
         <h3 className="mx-auto font-extrabold text-white opacity-25 inline-block">
           No Assigned tasks
-          <span role="img" aria-label="empty mailbox" className="ml-1">
+          <span role="img" aria-label="empty mailbox" className="ml-3">
             📪
           </span>
         </h3>
