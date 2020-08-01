@@ -5,6 +5,7 @@ import justClickedButtonReducer from "./slices/justClickedButtonSlice";
 import teamsReducer from "./slices/teamsSlice";
 import joinedTeamsReducer from "./slices/joinedTeamsSlice";
 import teamProjectsReducer from "./slices/teamProjectsSlice";
+import assignedTasksReducer from "./slices/assignedTasksSlice";
 
 const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ const store = configureStore({
     teams: teamsReducer,
     joinedTeams: joinedTeamsReducer,
     teamProjects: teamProjectsReducer,
+    assignedTasks: assignedTasksReducer,
   },
 });
 

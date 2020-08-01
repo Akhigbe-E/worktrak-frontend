@@ -18,6 +18,21 @@ export interface TeamDataType {
   description: string;
 }
 
+export interface TaskDataType {
+  id: string | null;
+  title: string | null;
+  description: string | null;
+  completed: boolean | null;
+  section_id: number | null;
+  project_id: number | null;
+  due_date: string | null;
+}
+
+export interface AssignedTasksReturnType {
+  success: boolean;
+  data: TaskDataType[];
+}
+
 export interface JoinedTeamDataType {
   teamIDs: string[];
   teamProjects: string[];
@@ -90,3 +105,8 @@ export const getJoinedTeamsRequest = (
   memberEmail: string
 ): Promise<GetJoinedTeamsRequestReturnType> =>
   customFetchGet(`/joinedteams/${memberEmail}`);
+
+export const getAssignedTasksRequest = (
+  memberEmail: string
+): Promise<AssignedTasksReturnType> =>
+  customFetchGet(`/tasksbyemail/${memberEmail}`);

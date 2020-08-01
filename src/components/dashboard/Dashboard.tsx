@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SideBar, { JoinedTeamsType } from "../sidebar/SideBar";
 import DashboardCards from "./dashboardCards/DashboardCards";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../app/store";
 import { Link } from "react-router-dom";
+import Tasks from "../tasks/Tasks";
+import { getAssignedTasks } from "./dashboardFunctions";
+import { getAssignedTasksRequest } from "../../util/backendRequests";
+import { setAssignedTasks } from "../../app/slices/assignedTasksSlice";
+import Loader from "../loader/Loader";
 
 export interface DashboardCardsData {
   title: string;
@@ -11,9 +16,25 @@ export interface DashboardCardsData {
 }
 
 const Dashboard: React.FC = () => {
+  // React API
+  const dispatch = useDispatch();
+
+  // Custom state
+  const [tasksAreLoading, setTasksAreLoading] = useState(true);
+
   const teamProjects: JoinedTeamsType[] = useSelector(
     (state: RootState) => state.teamProjects
   );
+  const assignedTasks = useSelector((state: RootState) => state.assignedTasks);
+
+  useEffect(() => {
+    const email = window.localStorage.getItem("email") || "";
+    getAssignedTasksRequest(email).then(({ data }) => {
+      dispatch(setAssignedTasks(data));
+      setTasksAreLoading(false);
+    });
+  }, []);
+
   const dashboardCardsData: DashboardCardsData[] = [
     { title: `TASKS YOU'RE ASSIGNED TO`, value: teamProjects.length },
     { title: `TASKS YOU'RE ASSIGNED TO`, value: teamProjects.length },
@@ -34,6 +55,7 @@ const Dashboard: React.FC = () => {
         <div className="mt-6">
           <div className="flex">
             <div className="w-1/2 pr-10">
+              {/* TASKS ASSIGNED */}
               <span className="flex align-bottom items-baseline justify-between text-white">
                 <h5 className="align-bottom inline-block  font-medium items-baseline">
                   Tasks assigned
@@ -45,6 +67,11 @@ const Dashboard: React.FC = () => {
                   View more
                 </Link>
               </span>
+              {tasksAreLoading ? (
+                <Loader />
+              ) : (
+                <Tasks tasksData={assignedTasks} />
+              )}
             </div>
             <div className="w-1/2">
               <div className="border border-gray-400 rounded-lg w-full my-3 py-3"></div>
