@@ -1,3 +1,5 @@
+import { TeamsType } from "../components/FirstScreen/FirstScreen";
+
 export const HOST = "http://localhost:3001";
 
 export interface LoginBodyType {
@@ -11,7 +13,7 @@ export interface ReturnType {
 }
 
 export interface TeamDataType {
-  id: string;
+  id: string | null;
   name: string;
   description: string;
 }
@@ -26,7 +28,7 @@ export interface CreateTeamRequestBodyType {
   description?: string;
 }
 
-export const customFetchGet = async (endpoint: string) => {
+const customFetchGet = async (endpoint: string) => {
   return await (
     await fetch(`${HOST}${endpoint}`, {
       method: "GET",
@@ -37,7 +39,7 @@ export const customFetchGet = async (endpoint: string) => {
     })
   ).json();
 };
-export const customFetchPost = async (endpoint: string, body: any) => {
+const customFetchPost = async (endpoint: string, body: any) => {
   return await (
     await fetch(`${HOST}${endpoint}`, {
       method: "POST",
@@ -64,12 +66,16 @@ export const loginRequest = async (
   ).json();
 };
 
-export const getTeamsRequest = (
-  endpoint: string
-): Promise<GetTeamRequestReturnType> => customFetchGet("/teams");
+export const getTeamsRequest = (): Promise<GetTeamRequestReturnType> =>
+  customFetchGet("/teams");
 
 export const createTeamsRequest = ({
   name,
   description,
 }: CreateTeamRequestBodyType): Promise<ReturnType> =>
   customFetchPost("/team", { name });
+
+export const getJoinedTeamsRequest = (
+  memberEmail: string
+): Promise<GetTeamRequestReturnType> =>
+  customFetchGet(`/joinedteams/${memberEmail}`);

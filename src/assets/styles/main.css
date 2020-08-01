@@ -645,6 +645,21 @@ h5 {
   font-size: 20px;
 }
 
+.active-side-navlink {
+  font-weight: 700;
+  --text-opacity: 1;
+  color: #fff;
+  color: rgba(255, 255, 255, var(--text-opacity));
+  border-left-width: 4px;
+  --border-opacity: 1;
+  border-color: #cbd5e0;
+  border-color: rgba(203, 213, 224, var(--border-opacity));
+}
+
+.active-side-navlink img {
+  width: 22px;
+}
+
 .container {
   width: 100%;
 }

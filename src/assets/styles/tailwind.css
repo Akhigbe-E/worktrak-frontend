@@ -19,6 +19,13 @@ h4 {
 h5 {
   font-size: 20px;
 }
+.active-side-navlink {
+  @apply font-bold text-white border-l-4 border-gray-400;
+}
+.active-side-navlink img {
+  width: 22px;
+}
+
 @tailwind components;
 
 @tailwind utilities;
