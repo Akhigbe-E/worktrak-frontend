@@ -18,9 +18,18 @@ export interface TeamDataType {
   description: string;
 }
 
+export interface JoinedTeamDataType {
+  teamIDs: string[];
+  teamProjects: string[];
+}
+
 export interface GetTeamRequestReturnType {
   success: boolean;
   data: Array<TeamDataType>;
+}
+export interface GetJoinedTeamsRequestReturnType {
+  success: boolean;
+  data: JoinedTeamDataType;
 }
 
 export interface CreateTeamRequestBodyType {
@@ -79,5 +88,5 @@ export const createTeamsRequest = ({
 
 export const getJoinedTeamsRequest = (
   memberEmail: string
-): Promise<GetTeamRequestReturnType> =>
+): Promise<GetJoinedTeamsRequestReturnType> =>
   customFetchGet(`/joinedteams/${memberEmail}`);

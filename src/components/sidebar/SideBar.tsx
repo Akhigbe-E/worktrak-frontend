@@ -14,6 +14,7 @@ import {
 import { setTeams } from "../../app/slices/teamsSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../app/store";
+import { setJoinedTeams } from "../../app/slices/joinedTeamsSlice";
 
 const SideBar: React.FC = () => {
   const dispatch = useDispatch();
@@ -23,12 +24,14 @@ const SideBar: React.FC = () => {
   useEffect(() => {
     //   get all teams
     getTeamsRequest().then(({ data }) => {
-      console.log(data);
-      // dispatch(setTeams(data));
+      // console.log(data);
+      dispatch(setTeams(data));
     });
     // get all joined teams from all teams
-    // getJoinedTeamsRequest()
-    // Get projects done by those teams
+    const useremail = window.localStorage.getItem("email") || "";
+    getJoinedTeamsRequest(useremail).then(({ data }) => {
+      dispatch(setJoinedTeams(data.teamIDs));
+    });
   }, []);
   const renderTeamsWithNestedProjects = () => {
     return <div></div>;
