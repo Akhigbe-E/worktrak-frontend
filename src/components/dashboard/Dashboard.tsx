@@ -56,7 +56,7 @@ const Dashboard: React.FC = () => {
           <div className="flex">
             <div className="w-1/2 pr-10">
               {/* TASKS ASSIGNED */}
-              <span className="flex align-bottom items-baseline justify-between text-white">
+              <span className="flex align-bottom items-baseline justify-between text-white mb-4">
                 <h5 className="align-bottom inline-block  font-medium items-baseline">
                   Tasks assigned
                 </h5>

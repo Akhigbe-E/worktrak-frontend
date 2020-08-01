@@ -9,7 +9,7 @@ const assignedTasksSlice = createSlice({
       id: null,
       title: "",
       description: "",
-      completed: null,
+      completed: false,
       section_id: null,
       project_id: null,
       due_date: "",

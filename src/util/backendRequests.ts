@@ -19,13 +19,13 @@ export interface TeamDataType {
 }
 
 export interface TaskDataType {
-  id: string | null;
-  title: string | null;
-  description: string | null;
-  completed: boolean | null;
+  id: number | null;
+  title: string;
+  description: string;
+  completed: boolean;
   section_id: number | null;
   project_id: number | null;
-  due_date: string | null;
+  due_date: string;
 }
 
 export interface AssignedTasksReturnType {
