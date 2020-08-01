@@ -23,6 +23,7 @@ export const handleLoginButtonClick = (
       dispatch(setJustClickedButton(false));
       if (success) {
         window.localStorage.setItem("token", data);
+        window.localStorage.setItem("email", email);
         history.push(DASHBOARD);
       }
     })
