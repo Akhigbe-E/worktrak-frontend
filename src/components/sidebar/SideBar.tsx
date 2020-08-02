@@ -108,7 +108,8 @@ const SideBar: React.FC = () => {
                   ({ team_id }) => team_id === parseInt(teamIndex, 10)
                 ).length === 0 && (
                   <div
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault();
                       dispatch(setIsCreateProjectModalOpen(true));
                     }}
                     className=" cursor-pointer text-sm font-thin pl-12 text-white"

@@ -11,6 +11,7 @@ function App() {
   const isCreateProjectModalOpen = useSelector(
     (state: RootState) => state.isCreateProjectModalOpen
   );
+  console.log(isCreateProjectModalOpen);
   return (
     <>
       {alertModal.visible && (
@@ -23,7 +24,7 @@ function App() {
           {alertModal.message}
         </div>
       )}
-      {true && (
+      {isCreateProjectModalOpen && (
         <Modal>
           <CreateProjectModal />
         </Modal>
