@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { setUser } from "../app/slices/userSlice";
 
-export const isAuthenticated = (dispatch: any) => {
+export const isAuthenticated = () => {
   let returnValue = false;
   const token = window.localStorage.getItem("token") || "";
   if (!!!token) return false;
@@ -13,7 +13,6 @@ export const isAuthenticated = (dispatch: any) => {
       return false;
     }
     const { email, id } = (decoded as any).data;
-    dispatch(setUser({ id, email }));
     returnValue = true;
   });
   return returnValue;

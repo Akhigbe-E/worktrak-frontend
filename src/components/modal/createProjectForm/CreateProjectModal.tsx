@@ -1,37 +1,36 @@
 import React, { useEffect, useState } from "react";
-import { getTeamsRequest } from "../../../util/backendRequests";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import jwt from "jsonwebtoken";
+
 import { RootState } from "../../../app/store";
+import { handleAddProjectClick } from "./createProjectModalFunctions";
+import { isAuthenticated } from "../../../util/util";
+import { setUser } from "../../../app/slices/userSlice";
 
 const CreateProjectModal: React.FC = () => {
+  const dispatch = useDispatch();
   const teams = useSelector((state: RootState) => state.teams);
+  const user = useSelector((state: RootState) => state.user);
 
   const [projectName, setProjectName] = useState("");
   const [teamID, setTeamID] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
-  const [projectPrivacy, setProjectPrivacy] = useState(null);
+  const [userEmail, setUserEmail] = useState(
+    localStorage.getItem("email") || ""
+  );
 
-  //   const handleAddProjectClick = (
-  //     projectName,
-  //     projectDescription,
-  //     teamID,
-  //     creatorEmail,
-  //     projectPrivacy
-  //   ) => {
-  //     addNewProjects({
-  //       name: projectName,
-  //       description: projectDescription,
-  //       team_id: parseInt(teamID, 10),
-  //       status: "on track",
-  //       creator_email: creatorEmail,
-  //       privacy: projectPrivacy,
-  //       board: "Board",
-  //     }).then((res) => {
-  //       dispatch(successAlert(res.message));
-  //       dispatch(closeAddProjectModal());
-  //       window.location.reload();
-  //     });
-  //   };
+  useEffect(() => {
+    const secret = process.env.REACT_APP_SECRET || "";
+    const token = window.localStorage.getItem("token") || "";
+    jwt.verify(token, secret, function (err, decoded) {
+      if (err) {
+        window.localStorage.removeItem("token");
+        return false;
+      }
+      const { email, id } = (decoded as any).data;
+    });
+  }, []);
+  console.log(userEmail);
 
   return (
     <div
@@ -74,9 +73,15 @@ const CreateProjectModal: React.FC = () => {
               e.preventDefault();
               setTeamID(e.target.value);
             }}
+            // defaultValue=""
             className="p-3 border border-gray-500 bg-customBlue-200 rounded-lg w-1/2 text-white outline-none focus:outline-none focus:border-customGreen-100"
           >
-            <option selected={true} disabled={true} hidden={true}></option>
+            <option
+              value=""
+              selected={true}
+              disabled={true}
+              hidden={true}
+            ></option>
             {Object.values(teams).map((team) => (
               <option key={team.id || ""} value={team.id || ""}>
                 {team.name}
@@ -86,7 +91,16 @@ const CreateProjectModal: React.FC = () => {
         </div>
         <button
           onClick={(e) => {
+            console.log(teamID);
+            console.log(user);
             e.preventDefault();
+            handleAddProjectClick(
+              dispatch,
+              projectName,
+              teamID,
+              projectDescription,
+              userEmail
+            );
           }}
           className="w-5/6 mx-auto block text-base font-bold border border-customGreen-200 py-3 text-customGreen-200 rounded-lg outline-none focus:bg-customGreen-200 focus:text-white focus:outline-none"
         >

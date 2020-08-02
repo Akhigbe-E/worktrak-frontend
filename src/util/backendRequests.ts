@@ -1,4 +1,5 @@
 import { TeamsType } from "../components/FirstScreen/FirstScreen";
+import { ProjectType } from "../components/dashboard/Dashboard";
 
 export const HOST = "http://localhost:3001";
 
@@ -50,6 +51,22 @@ export interface GetJoinedTeamsRequestReturnType {
 export interface CreateTeamRequestBodyType {
   name: string;
   description?: string;
+}
+
+export interface NewProjectInputType {
+  name: string;
+  description: string;
+  team_id: number;
+  status: string;
+  creator_email: string;
+  privacy: string;
+  board: string;
+}
+
+export interface PostNewProjectReturnType {
+  success: boolean;
+  message: string;
+  data: ProjectType;
 }
 
 const customFetchGet = async (endpoint: string) => {
@@ -110,3 +127,10 @@ export const getAssignedTasksRequest = (
   memberEmail: string
 ): Promise<AssignedTasksReturnType> =>
   customFetchGet(`/tasksbyemail/${memberEmail}`);
+
+export const postNewProjectsRequest = (
+  body: NewProjectInputType
+): Promise<PostNewProjectReturnType> => {
+  console.log(body);
+  return customFetchPost(`/project`, body);
+};
