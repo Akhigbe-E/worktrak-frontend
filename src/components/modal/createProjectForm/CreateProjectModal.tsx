@@ -3,8 +3,12 @@ import React from "react";
 const CreateProjectModal: React.FC = () => {
   return (
     <div
-      className="absolute m-auto top-0 bottom-0 right-0 left-0 z-50 py-8 px-10 rounded-lg bg-customBlue-300 shadow-2xl"
-      style={{ width: "40rem", height: "24.5rem" }}
+      className="absolute m-auto top-0 bottom-0 right-0 left-0 z-50 py-8 px-10 rounded-lg bg-customBlue-300"
+      style={{
+        width: "40rem",
+        height: "26rem",
+        boxShadow: "0px 4px 40px rgba(0, 0, 0, 0.589)",
+      }}
     >
       <h5 className="text-white font-semibold mb-10">Create a project</h5>
       <form>
