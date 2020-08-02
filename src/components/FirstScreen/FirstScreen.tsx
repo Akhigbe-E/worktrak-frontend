@@ -33,7 +33,15 @@ const FirstScreen: React.FC<FirstScreenPropType> = ({ children }) => {
   );
   const hasCreatedTeam: boolean | number = Object.keys(teams).length;
 
-  if (isLoading) return <Loader />;
+  if (isLoading)
+    return (
+      <div
+        className="absolute w-64 mx-auto"
+        style={{ top: "10rem", left: "0", right: "0" }}
+      >
+        <Loader />
+      </div>
+    );
   return <>{hasCreatedTeam ? children : <Redirect to={SETUPTEAM} />}</>;
 };
 
