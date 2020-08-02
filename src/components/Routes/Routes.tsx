@@ -30,13 +30,16 @@ const Routes: React.FC = () => {
               <FirstScreen>
                 <Route path={DASHBOARD} component={Dashboard} />
               </FirstScreen>
-              <Route path={ASSIGNEDTASKS} component={AssignedTasks} />
+              <Route
+                path={ASSIGNEDTASKS}
+                render={() => (
+                  <Layout>
+                    <AssignedTasks />
+                  </Layout>
+                )}
+              />
             </>
           </ProtectedRoute>
-
-          {/* <Layout>
-                <></>
-              </Layout> */}
         </Switch>
       </Router>
     </>

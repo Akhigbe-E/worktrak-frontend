@@ -8,7 +8,7 @@ import AddTeamIcon from "../../assets/images/add.svg";
 import TeamIcon from "../../assets/images/teamIcon.svg";
 
 import { Link, NavLink } from "react-router-dom";
-import { DASHBOARD } from "../../util/allEndpoints";
+import { DASHBOARD, ASSIGNEDTASKS } from "../../util/allEndpoints";
 import {
   getTeamsRequest,
   getJoinedTeamsRequest,
@@ -142,7 +142,7 @@ const SideBar: React.FC = () => {
           </span>
         </NavLink>
         <NavLink
-          to="/tasks"
+          to={ASSIGNEDTASKS}
           activeClassName="active-side-navlink"
           className="pl-8 py-1"
         >
