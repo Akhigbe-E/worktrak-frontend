@@ -25,6 +25,7 @@ export const handleAddProjectClick = (
     }, 2000);
 
     dispatch(setIsCreateProjectModalOpen(false));
-    // window.location.reload();
+    // Alternative: Create a slice for new project, pass it into an all projects variable
+    window.location.reload();
   });
 };
