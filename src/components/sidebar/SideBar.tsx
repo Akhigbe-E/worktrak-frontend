@@ -47,6 +47,7 @@ const SideBar: React.FC = () => {
       }
     );
   }, []);
+
   const renderTeamsWithNestedProjects = () => {
     return (
       <div>
