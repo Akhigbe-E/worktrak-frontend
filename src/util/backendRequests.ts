@@ -43,6 +43,10 @@ export interface GetTeamRequestReturnType {
   success: boolean;
   data: Array<TeamDataType>;
 }
+export interface GetProjectRequestReturnType {
+  success: boolean;
+  data: Array<ProjectType>;
+}
 export interface GetJoinedTeamsRequestReturnType {
   success: boolean;
   data: JoinedTeamDataType;
@@ -111,6 +115,11 @@ export const loginRequest = async (
 
 export const getTeamsRequest = (): Promise<GetTeamRequestReturnType> =>
   customFetchGet("/teams");
+
+export const getProjectRequest = (
+  projectID: string
+): Promise<GetProjectRequestReturnType> =>
+  customFetchGet(`/project/${projectID}`);
 
 export const createTeamsRequest = ({
   name,

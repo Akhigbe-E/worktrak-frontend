@@ -25,7 +25,7 @@ export interface ProjectType {
   description: string;
   status: string;
   creator_email: string;
-  created_at?: Date;
+  created_at?: any;
 }
 
 const Dashboard: React.FC = () => {
