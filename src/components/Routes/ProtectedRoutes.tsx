@@ -3,6 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 import { isAuthenticated } from "../../util/util";
 import Layout from "../layout/Layout";
 import { LOGIN } from "../../util/allEndpoints";
+import { useDispatch } from "react-redux";
 
 export interface ProtectedRouteProps {
   children: ReactChildren | ReactChild;
@@ -13,12 +14,13 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   children,
   location,
 }) => {
+  const dispatch = useDispatch();
   return (
     <>
       <Route
         render={({ location }) =>
           // Dispatch Decoded data to store
-          isAuthenticated() ? (
+          isAuthenticated(dispatch) ? (
             children
           ) : (
             <Redirect
