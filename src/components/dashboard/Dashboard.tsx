@@ -53,26 +53,27 @@ const Dashboard: React.FC = () => {
   const renderOnGoingProjects = (onGoingProjects: ProjectType[]) => {
     return (
       // onGoingProjects
-      [
-        {
-          project_id: 1,
-          name: "Make advert",
-          team_id: 10,
-          status: "In progress",
-        },
-        {
-          project_id: 1,
-          name: "Make advert",
-          team_id: 10,
-          status: "In progress",
-        },
-        {
-          project_id: 1,
-          name: "Make advert",
-          team_id: 10,
-          status: "In progress",
-        },
-      ].map(({ project_id, name, team_id, status }, index) => {
+      // [
+      //   {
+      //     project_id: 1,
+      //     name: "Make advert",
+      //     team_id: 10,
+      //     status: "In progress",
+      //   },
+      //   {
+      //     project_id: 1,
+      //     name: "Make advert",
+      //     team_id: 10,
+      //     status: "In progress",
+      //   },
+      //   {
+      //     project_id: 1,
+      //     name: "Make advert",
+      //     team_id: 10,
+      //     status: "In progress",
+      //   },
+      // ]
+      teamProjects.map(({ project_id, name, team_id, status }, index) => {
         return (
           <Link
             to={`/project/${project_id}`}
@@ -91,7 +92,7 @@ const Dashboard: React.FC = () => {
 
   const dashboardCardsData: DashboardCardsData[] = [
     { title: `TASKS YOU'RE ASSIGNED TO`, value: teamProjects.length },
-    { title: `TASKS YOU'RE ASSIGNED TO`, value: teamProjects.length },
+    { title: `TEAM PROJECTS`, value: teamProjects.length },
     { title: `TASKS YOU'RE ASSIGNED TO`, value: teamProjects.length },
   ];
   return (
