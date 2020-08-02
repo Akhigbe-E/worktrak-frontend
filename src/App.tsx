@@ -3,9 +3,14 @@ import "./assets/styles/main.css";
 import Routes from "./components/routes/Routes";
 import { useSelector } from "react-redux";
 import { RootState } from "./app/store";
+import Modal from "./components/modal/Modal";
+import CreateProjectModal from "./components/modal/createProjectForm/CreateProjectModal";
 
 function App() {
   const alertModal = useSelector((state: RootState) => state.alertModal);
+  const isCreateProjectModalOpen = useSelector(
+    (state: RootState) => state.isCreateProjectModalOpen
+  );
   return (
     <>
       {alertModal.visible && (
@@ -17,6 +22,11 @@ function App() {
         >
           {alertModal.message}
         </div>
+      )}
+      {true && (
+        <Modal>
+          <CreateProjectModal />
+        </Modal>
       )}
       <Routes />
     </>

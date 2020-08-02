@@ -20,6 +20,7 @@ import { setJoinedTeams } from "../../app/slices/joinedTeamsSlice";
 import { setTeamProjects } from "../../app/slices/teamProjectsSlice";
 import { TeamsType } from "../FirstScreen/FirstScreen";
 import { ProjectType } from "../dashboard/Dashboard";
+import { setIsCreateProjectModalOpen } from "../../app/slices/isCreateProjectModalOpenSlice";
 
 const SideBar: React.FC = () => {
   const dispatch = useDispatch();
@@ -108,7 +109,7 @@ const SideBar: React.FC = () => {
                 ).length === 0 && (
                   <div
                     onClick={() => {
-                      // dispatch(openAddProjectModal());
+                      dispatch(setIsCreateProjectModalOpen(true));
                     }}
                     className=" cursor-pointer text-sm font-thin pl-12 text-white"
                   >

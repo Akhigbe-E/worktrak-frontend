@@ -6,6 +6,7 @@ import teamsReducer from "./slices/teamsSlice";
 import joinedTeamsReducer from "./slices/joinedTeamsSlice";
 import teamProjectsReducer from "./slices/teamProjectsSlice";
 import assignedTasksReducer from "./slices/assignedTasksSlice";
+import isCreateProjectModalOpenReducer from "./slices/isCreateProjectModalOpenSlice";
 
 const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ const store = configureStore({
     joinedTeams: joinedTeamsReducer,
     teamProjects: teamProjectsReducer,
     assignedTasks: assignedTasksReducer,
+    isCreateProjectModalOpen: isCreateProjectModalOpenReducer,
   },
 });
 

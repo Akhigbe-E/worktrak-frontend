@@ -1,16 +1,16 @@
 import React, { useEffect, ReactChild, ReactChildren } from "react";
 import ReactDOM from "react-dom";
 
-const modalNode = document.getElementById("modal");
-
 export interface ModalPropType {
   children: ReactChild | ReactChildren;
 }
+export const modalNode = document.getElementById("modal");
 
 const Modal: React.FC<ModalPropType> = ({ children }) => {
   const el = document.createElement("div");
   useEffect(() => {
     modalNode?.appendChild(el);
+    // el.className = "absolute z-50";
     return () => {
       modalNode?.removeChild(el);
     };
