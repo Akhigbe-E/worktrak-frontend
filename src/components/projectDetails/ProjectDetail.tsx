@@ -6,6 +6,10 @@ import { setOpenedProject } from "../../app/slices/openedProjectSlice";
 import { RootState } from "../../app/store";
 import Loader from "../loader/Loader";
 import { ProjectType } from "../dashboard/Dashboard";
+import ProjectBoard from "../projectBoard/ProjectBoard";
+import ProjectTimeline from "../projectTimeline/ProjectTimeline";
+import ProjectComments from "../projectComments/ProjectComments";
+import ProjectStatus from "../projectStatus/ProjectStatus";
 
 const ProjectDetail: React.FC = () => {
   const { projectID } = useParams();
@@ -24,26 +28,26 @@ const ProjectDetail: React.FC = () => {
   if (isLoading) return <Loader />;
   const { name, description } = openedProject;
 
-  //   const renderActiveTab = (param) => {
-  //     switch (param) {
-  //       case "board":
-  //         return (
-  //           <ProjectBoard
-  //             projectID={projectID}
-  //             projectDesc={openedProject.description}
-  //           />
-  //         );
-  //       case "timeline":
-  //         return <ProjectTimeline projectID={projectID} />;
-  //       case "comments":
-  //         return <ProjectComments projectID={projectID} />;
-  //       case "progress":
-  //         return <ProjectProgress project={openedProject} />;
+  const renderActiveTab = (param: string) => {
+    switch (param) {
+      case "board":
+        return (
+          <ProjectBoard
+            projectID={projectID}
+            projectDescription={openedProject.description}
+          />
+        );
+      case "timeline":
+        return <ProjectTimeline projectID={projectID} />;
+      case "comments":
+        return <ProjectComments projectID={projectID} />;
+      case "progress":
+        return <ProjectStatus project={openedProject} />;
 
-  //       default:
-  //         break;
-  //     }
-  //   };
+      default:
+        break;
+    }
+  };
   return (
     <>
       <div className="text-white mb-10">
@@ -96,7 +100,7 @@ const ProjectDetail: React.FC = () => {
           )}
         </span>
       </div>
-      <div className="px-4 bg-customBlue-100"></div>
+      {renderActiveTab(activeTab)}
     </>
   );
 };
