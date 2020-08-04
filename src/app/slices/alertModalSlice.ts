@@ -1,4 +1,8 @@
-import { createSlice, bindActionCreators } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  bindActionCreators,
+  PayloadAction,
+} from "@reduxjs/toolkit";
 
 const alertModalSlice = createSlice({
   name: "alertModal",
@@ -8,7 +12,14 @@ const alertModalSlice = createSlice({
     message: "",
   },
   reducers: {
-    setAlertModal: (state, action) => action.payload,
+    setAlertModal: (
+      state,
+      action: PayloadAction<{
+        success: boolean;
+        visible: boolean;
+        message: string;
+      }>
+    ) => action.payload,
   },
 });
 

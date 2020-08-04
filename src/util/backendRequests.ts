@@ -66,11 +66,27 @@ export interface NewProjectInputType {
   privacy: string;
   board: string;
 }
+export interface NewSectionInputType {
+  name: string;
+  project_id: string | number;
+}
+
+export interface SectionsDataReturnType {
+  id: number | string;
+  name: string;
+  project_id: number;
+}
 
 export interface PostNewProjectReturnType {
   success: boolean;
   message: string;
   data: ProjectType;
+}
+
+export interface SectionReturnType {
+  success: boolean;
+  message: string;
+  data: SectionsDataReturnType[];
 }
 
 const customFetchGet = async (endpoint: string) => {
@@ -137,9 +153,19 @@ export const getAssignedTasksRequest = (
 ): Promise<AssignedTasksReturnType> =>
   customFetchGet(`/tasksbyemail/${memberEmail}`);
 
+export const getOpenedProjectSectionsRequest = (
+  projectID: string | number
+): Promise<SectionReturnType> => customFetchGet(`/tasksbyemail/${projectID}`);
+
 export const postNewProjectsRequest = (
   body: NewProjectInputType
 ): Promise<PostNewProjectReturnType> => {
-  console.log(body);
   return customFetchPost(`/project`, body);
+};
+
+export const postNewSectionRequest = (
+  body: NewSectionInputType
+): Promise<SectionReturnType> => {
+  console.log(body);
+  return customFetchPost(`/section`, body);
 };
