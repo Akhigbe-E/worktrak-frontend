@@ -8,13 +8,9 @@ import { setOpenedProjectSections } from "../../app/slices/openedProjectSections
 
 export interface ProjectBoardPropType {
   projectID: string | number;
-  projectDescription: string;
 }
 
-const ProjectBoard: React.FC<ProjectBoardPropType> = ({
-  projectID,
-  projectDescription,
-}) => {
+const ProjectBoard: React.FC<ProjectBoardPropType> = ({ projectID }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,11 +22,11 @@ const ProjectBoard: React.FC<ProjectBoardPropType> = ({
   return (
     <div className="px-4 py-5 bg-customBlue-100 rounded-lg">
       {/* <DragDropContext onDragEnd={onDragEnd}> */}
-      <div className="mx-10" style={{ minHeight: "100vh" }}>
+      <div style={{ minHeight: "100vh" }}>
         <div className="flex flex-no-wrap">
           {/* {renderSections(nestedSections)} */}
           <button
-            className="bg-white rounded-lg bg-opacity-25 sticky mt-10 mb-5 h-64 w-48"
+            className="bg-white rounded-lg bg-opacity-25 sticky mt-10 mb-5 h-64 w-40 outline-none focus:outline-none"
             style={{ paddingTop: "2.5px", paddingBottom: "2.5px" }}
             onClick={(e) => {
               handleNewSectionButtonClick(
@@ -47,7 +43,9 @@ const ProjectBoard: React.FC<ProjectBoardPropType> = ({
               src={AddSectionIcon}
               alt="add task"
             />
-            <p className="block mt-2 text-base text-gray-200">Add Section</p>
+            <p className="block mt-2 text-base font-medium text-customBlue-100">
+              Add Section
+            </p>
           </button>
         </div>
       </div>

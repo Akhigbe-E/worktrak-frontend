@@ -31,12 +31,7 @@ const ProjectDetail: React.FC = () => {
   const renderActiveTab = (param: string) => {
     switch (param) {
       case "board":
-        return (
-          <ProjectBoard
-            projectID={projectID}
-            projectDescription={openedProject.description}
-          />
-        );
+        return <ProjectBoard projectID={projectID} />;
       case "timeline":
         return <ProjectTimeline projectID={projectID} />;
       case "comments":
