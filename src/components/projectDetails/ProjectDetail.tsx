@@ -54,7 +54,7 @@ const ProjectDetail: React.FC = () => {
         <h3 className="font-bold mb-1">{name}</h3>
         <p>{description || "There is no description for this project"}</p>
       </div>
-      <div className="flex mb-4 ml-5 text-lg text-white font-semibold">
+      <div className="flex ml-8 text-md text-white font-semibold">
         <span
           className={`bg-opacity-0 cursor-pointer mr-6 `}
           onClick={() => {
