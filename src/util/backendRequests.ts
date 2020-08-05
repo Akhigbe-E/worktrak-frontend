@@ -71,6 +71,26 @@ export interface NewSectionInputType {
   project_id: string | number;
 }
 
+export interface NewTaskInputType {
+  title: string;
+  description?: string;
+  completed: boolean;
+  due_date?: string;
+  project_id: string | number;
+  section_id: string | number;
+}
+export interface TaskDataReturnType {
+  id: number;
+  title: string;
+  project_id: string | number;
+  section_id: string | number;
+}
+export interface TaskReturnType {
+  success: boolean;
+  message: string;
+  data: TaskDataReturnType[];
+}
+
 export interface SectionsDataReturnType {
   id: number | string;
   name: string;
@@ -171,4 +191,11 @@ export const postNewSectionRequest = (
 ): Promise<SectionReturnType> => {
   console.log(body);
   return customFetchPost(`/section`, body);
+};
+
+export const postNewTaskRequest = (
+  body: NewTaskInputType
+): Promise<TaskReturnType> => {
+  console.log(body);
+  return customFetchPost(`/task`, body);
 };
