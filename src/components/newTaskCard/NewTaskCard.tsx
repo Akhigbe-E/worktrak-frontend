@@ -35,17 +35,17 @@ const NewTaskCard: React.FC<NewTaskCardPropType> = ({
     }
   };
   return (
-    <div className="py-1 px-3.5 w-full h-20 mb-5 bg-white rounded-lg">
-      <input
-        className="border-0 outline-none p-0"
-        placeholder="Press Enter to create task"
-        value={title}
-        onChange={(e) => {
-          setTitle(e.target.value);
-        }}
-        onKeyDown={checkKeyEntered}
-      />
-    </div>
+    // <div className="py-1 px-3.5 w-full h-20 mb-5 bg-white rounded-lg">
+    <textarea
+      className="border-0 outline-none p-2 w-full h-20 rounded-lg"
+      placeholder="Press Enter to create task"
+      value={title}
+      onChange={(e) => {
+        setTitle(e.target.value);
+      }}
+      onKeyDown={checkKeyEntered}
+    ></textarea>
+    // </div>
   );
 };
 
