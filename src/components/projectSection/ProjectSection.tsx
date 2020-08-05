@@ -2,18 +2,22 @@ import React, { useState } from "react";
 import DeleteIcon from "../../assets/images/deleteIcon.svg";
 import AddTaskIcon from "../../assets/images/addInProjectBoard.svg";
 import NewTaskCard from "../newTaskCard/NewTaskCard";
+import { Droppable } from "react-beautiful-dnd";
+import ProjectTask from "../projectTask/ProjectTask";
+import { TaskDataType } from "../../util/backendRequests";
 
 export interface ProjectSectionPropType {
   id: number | string;
   sectionName: string;
   projectID: number | string;
-  tasks: any[];
+  tasks: TaskDataType[];
 }
 
 const ProjectSection: React.FC<ProjectSectionPropType> = ({
   id,
   sectionName,
   projectID,
+  tasks,
 }) => {
   const [inputtedSectionName, setInputtedSectionName] = useState(sectionName);
   const [isAddNewTaskCardOpen, setIsAddNewTaskCardOpen] = useState(false);
@@ -24,6 +28,42 @@ const ProjectSection: React.FC<ProjectSectionPropType> = ({
   };
   const closeAddTaskCard = () => {
     setIsAddNewTaskCardOpen(false);
+  };
+  const handleDeleteTask = (id, sectionID) => {
+    const proceedWithDeletion = window.confirm(
+      "Kindly confirm that you want to delete this Task"
+    );
+    if (!proceedWithDeletion) return;
+    deleteTask(id.id).then((res) => {
+      const tid = id.id;
+      dispatch(deleteSelectedTask({ tid, sectionID }));
+    });
+  };
+  const renderFilteredTasks = (
+    id: number,
+    tasks: TaskDataType[],
+    isDraggingOver: any,
+    isAddNewTaskCardOpen: boolean
+  ) => {
+    return tasks.length === 0 && !isAddNewTaskCardOpen ? (
+      <span
+        className={`bg-white bg-opacity-50 block w-full h-40 rounded-lg`}
+      ></span>
+    ) : (
+      <div>
+        {tasks.map((task, index) => (
+          <ProjectTask
+            handleDeleteTask={(tid: number) => {
+              handleDeleteTask(tid, id);
+            }}
+            key={`${task.id}`}
+            {...task}
+            sectionID={id}
+            index={index}
+          />
+        ))}
+      </div>
+    );
   };
   return (
     <div className="w-64 flex-col mb-6 mr-10">
@@ -66,6 +106,26 @@ const ProjectSection: React.FC<ProjectSectionPropType> = ({
           closeAddTaskCard={closeAddTaskCard}
         />
       ) : undefined}
+      <Droppable droppableId={`${id}`}>
+        {(provided, snapshot) => (
+          <div
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            isDraggingOver={snapshot.isDraggingOver}
+            className={`flex-grow p-2 w-full rounded-lg ${
+              snapshot.isDraggingOver ? " bg-gray-500 bg-opacity-25" : ""
+            }`}
+          >
+            {renderFilteredTasks(
+              id,
+              tasks,
+              snapshot.isDraggingOver,
+              isAddNewTaskCardOpen
+            )}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
     </div>
   );
 };

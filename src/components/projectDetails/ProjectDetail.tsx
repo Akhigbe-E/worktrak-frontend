@@ -45,7 +45,7 @@ const ProjectDetail: React.FC = () => {
   };
   return (
     <>
-      <div className="fixed bg-customBlue-200 w-full pt-12 z-20">
+      <div className="fixed bg-customBlue-200 w-full pl-4 -ml-4 pt-12 z-20">
         <div className="max-w-xs" style={{ minWidth: "860px" }}>
           <div className="text-white mb-8">
             <h3 className="font-bold mb-1">{name}</h3>
