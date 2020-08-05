@@ -1,21 +1,29 @@
 import React, { useState } from "react";
 import DeleteIcon from "../../assets/images/deleteIcon.svg";
 import AddTaskIcon from "../../assets/images/addInProjectBoard.svg";
+import NewTaskCard from "../newTaskCard/NewTaskCard";
 
 export interface ProjectSectionPropType {
+  id: number | string;
   sectionName: string;
-  // sectionID: number | string;
   projectID: number | string;
   tasks: any[];
 }
 
-const ProjectSection: React.FC<ProjectSectionPropType> = ({ sectionName }) => {
+const ProjectSection: React.FC<ProjectSectionPropType> = ({
+  id,
+  sectionName,
+  projectID,
+}) => {
   const [inputtedSectionName, setInputtedSectionName] = useState(sectionName);
   const [isAddNewTaskCardOpen, setIsAddNewTaskCardOpen] = useState(false);
 
   const openAddTaskNewTaskCard = (e: React.MouseEvent) => {
     e.preventDefault();
     setIsAddNewTaskCardOpen(!isAddNewTaskCardOpen);
+  };
+  const closeAddTaskCard = () => {
+    setIsAddNewTaskCardOpen(false);
   };
   return (
     <div className="w-64 flex-col mb-6 mr-10">
@@ -52,7 +60,7 @@ const ProjectSection: React.FC<ProjectSectionPropType> = ({ sectionName }) => {
         <img className="mx-auto" src={AddTaskIcon} alt="add task" />
       </button>
       {isAddNewTaskCardOpen ? (
-        <AddTaskCard
+        <NewTaskCard
           sectionID={id}
           projectID={projectID}
           closeAddTaskCard={closeAddTaskCard}
