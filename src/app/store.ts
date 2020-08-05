@@ -10,6 +10,8 @@ import isCreateProjectModalOpenReducer from "./slices/isCreateProjectModalOpenSl
 import userReducer from "./slices/userSlice";
 import openedProjectReducer from "./slices/openedProjectSlice";
 import openedProjectSectionsReducer from "./slices/openedProjectSectionsSlice";
+import openedProjectTasksReducer from "./slices/openedProjectTasksSlice";
+import tasksInSectionsReducer from "./slices/tasksInSectionsSlice";
 
 const store = configureStore({
   reducer: {
@@ -23,6 +25,8 @@ const store = configureStore({
     user: userReducer,
     openedProject: openedProjectReducer,
     openedProjectSections: openedProjectSectionsReducer,
+    openedProjectTasks: openedProjectTasksReducer,
+    tasksInSections: tasksInSectionsReducer,
   },
 });
 

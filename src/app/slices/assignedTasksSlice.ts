@@ -6,12 +6,12 @@ const assignedTasksSlice = createSlice({
   name: "assignedTasks",
   initialState: {
     id: {
-      id: null,
+      id: 0,
       title: "",
       description: "",
       completed: false,
-      section_id: null,
-      project_id: null,
+      section_id: 0,
+      project_id: 0,
       due_date: "",
     },
   },

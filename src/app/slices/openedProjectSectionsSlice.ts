@@ -4,7 +4,7 @@ import { SectionsDataReturnType } from "../../util/backendRequests";
 
 const openedProjectSectionsSlice = createSlice({
   name: "openedProjectSections",
-  initialState: { id: { id: null, name: "", project_id: null } },
+  initialState: { id: { id: 0, name: "", project_id: null } },
   reducers: {
     setOpenedProjectSections: {
       reducer: (state, action: PayloadAction<any>) => action.payload,

@@ -20,16 +20,16 @@ export interface TeamDataType {
 }
 
 export interface TaskDataType {
-  id: number | null;
+  id: number;
   title: string;
   description: string;
   completed: boolean;
-  section_id: number | null;
-  project_id: number | null;
+  section_id: number;
+  project_id: number;
   due_date: string;
 }
 
-export interface AssignedTasksReturnType {
+export interface TasksReturnType {
   success: boolean;
   data: TaskDataType[];
 }
@@ -150,12 +150,15 @@ export const getJoinedTeamsRequest = (
 
 export const getAssignedTasksRequest = (
   memberEmail: string
-): Promise<AssignedTasksReturnType> =>
-  customFetchGet(`/tasksbyemail/${memberEmail}`);
+): Promise<TasksReturnType> => customFetchGet(`/tasksbyemail/${memberEmail}`);
+
+export const getTasksBySectionsAndProjectIdRequest = (
+  projectID: string | number
+): Promise<TasksReturnType> => customFetchGet(`/tasksbyemail/${projectID}`);
 
 export const getOpenedProjectSectionsRequest = (
   projectID: string | number
-): Promise<SectionReturnType> => customFetchGet(`/tasksbyemail/${projectID}`);
+): Promise<SectionReturnType> => customFetchGet(`/sections/${projectID}`);
 
 export const postNewProjectsRequest = (
   body: NewProjectInputType
