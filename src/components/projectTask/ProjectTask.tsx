@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import ThreeDotsIcon from "../../assets/img/ThreeDots.svg";
 import AddAssigneeIcon from "../../assets/images/assignTeamMember.svg";
+import CompletedIcon from "../../assets/images/completed.svg";
 import { Draggable } from "react-beautiful-dnd";
 // import AddDueDateIcon from "../../assets/img/addDueDateIcon.svg";
 // import ProfileImage from "../../assets/img/profileImage.svg";
@@ -29,7 +30,11 @@ export const ProjectTask: React.FC<ProjectTaskPropType> = ({
   handleDeleteTask,
 }) => {
   const [memberEmails, setMemberEmails] = useState([]);
+  const [isComplete, setIsComplete] = useState(completed);
   const dispatch = useDispatch();
+  const handleCompletionButtonClick = (isComplete: boolean) => {
+    setIsComplete(!isComplete);
+  };
   const handleEditTask = () => {
     // dispatch(
     //   setCurrentlyOpenedTask({
@@ -71,22 +76,32 @@ export const ProjectTask: React.FC<ProjectTaskPropType> = ({
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
-          data-isDragging={snapshot.isDragging}
-          className={`py-4 px-3.5 w-full mb-4 bg-white rounded-md`}
+          data-isdragging={snapshot.isDragging}
+          className={`py-4 px-3 w-full mb-4 bg-white rounded-md`}
         >
           <div className="flex justify-start align-middle items-center">
             <button
               onClick={(e) => {
                 e.preventDefault();
-                // handleDeleteTask({ id });
+                handleCompletionButtonClick(isComplete);
               }}
-              className="w-2/12 p-0 mb-1 bg-opacity-0 rounded-lg"
+              className="w-1/12 p-0 mb-1 mr-2 bg-opacity-0 rounded-lg align-middle items-center outline-none focus:outline-none"
             >
-              <span className="rounded-full w-4 h-4 border border-customBlue-100 mr-2"></span>
+              {!isComplete ? (
+                <span className="rounded-full align-middle items-center w-4 h-4 border border-customBlue-100 mr-2 inline-block"></span>
+              ) : (
+                <span>
+                  <img
+                    src={CompletedIcon}
+                    alt="completed"
+                    className="w-5 h-5"
+                  />
+                </span>
+              )}
             </button>
             <span
-              className={`text-base flex-grow font-semibold ${
-                completed ? "line-through" : ""
+              className={`text-base flex-grow font-medium ${
+                isComplete ? "line-through" : ""
               }`}
             >
               {title}
@@ -97,7 +112,7 @@ export const ProjectTask: React.FC<ProjectTaskPropType> = ({
             onClick={() => {
               //   handleEditTask({ title, id });
             }}
-            className="flex float-right mt-1 flex-wrap"
+            className="flex justify-end flex-wrap"
           >
             {memberEmails.length !== 0 ? (
               <span className="">
@@ -112,11 +127,11 @@ export const ProjectTask: React.FC<ProjectTaskPropType> = ({
                 ))}
               </span>
             ) : (
-              <span className="w-1/5">
+              <span className="w-1/8 text-right">
                 <img
                   src={AddAssigneeIcon}
                   alt="add assignee"
-                  className="rounded-full border p-1"
+                  className="rounded-full border p-1 w-6 h-6"
                   style={{ borderColor: "#F55F44" }}
                 />
               </span>

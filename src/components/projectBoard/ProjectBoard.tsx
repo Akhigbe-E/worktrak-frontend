@@ -6,6 +6,7 @@ import {
   getOpenedProjectSectionsRequest,
   getTasksBySectionsAndProjectIdRequest,
   TaskDataType,
+  updateTaskRequest,
 } from "../../util/backendRequests";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpenedProjectSections } from "../../app/slices/openedProjectSectionsSlice";
@@ -154,14 +155,14 @@ const ProjectBoard: React.FC<ProjectBoardPropType> = ({ projectID }) => {
     dispatch(setTasksInSections(newNestedSections));
 
     let temp = { ...openedProjectTasks };
-    // updateTask({ ...temp[draggableId], section_id: finish.id }).then(
-    //   (data) => {},
-    //   (err) => {}
-    // );
+    updateTaskRequest({ ...temp[draggableId], section_id: finish.id }).then(
+      (data) => {},
+      (err) => {}
+    );
   };
   return (
     <div className="relative">
-      <div className="px-4 py-5 bg-customBlue-100 rounded-lg ">
+      <div className="px-4 py-6 pt-10 bg-customBlue-100 rounded-lg ">
         <DragDropContext onDragEnd={onDragEnd}>
           <div style={{ minHeight: "100vh" }}>
             <div className="flex flex-no-wrap ml-3">

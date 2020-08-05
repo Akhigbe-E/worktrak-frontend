@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { arrayToObject } from "../../util/util";
-import { TaskDataType } from "../../util/backendRequests";
+import { TaskDataType, TaskDataReturnType } from "../../util/backendRequests";
 
 const openedProjectTasksSlice = createSlice({
   name: "openedProjectTasks",
@@ -22,7 +22,10 @@ const openedProjectTasksSlice = createSlice({
         payload: arrayToObject(value, "id"),
       }),
     },
-    addTaskToOpenedProject: (state, action: PayloadAction<TaskDataType>) => ({
+    addTaskToOpenedProject: (
+      state,
+      action: PayloadAction<TaskDataReturnType>
+    ) => ({
       ...state,
       [action.payload.id]: action.payload,
     }),

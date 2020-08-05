@@ -135,6 +135,23 @@ const customFetchPost = async (endpoint: string, body: any) => {
   ).json();
 };
 
+export const customFetchUpdate = async (endpoint: string, body: any) => {
+  const token = window.localStorage.getItem("token") || "";
+  const email = window.localStorage.getItem("email") || "";
+  console.log(body);
+  return await (
+    await fetch(`${HOST}${endpoint}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+        useremail: email,
+      },
+      body: JSON.stringify({ ...body }),
+    })
+  ).json();
+};
+
 export const loginRequest = async (
   body: LoginBodyType
 ): Promise<ReturnType> => {
@@ -198,4 +215,10 @@ export const postNewTaskRequest = (
 ): Promise<TaskReturnType> => {
   console.log(body);
   return customFetchPost(`/task`, body);
+};
+
+export const updateTaskRequest = (
+  body: NewTaskInputType
+): Promise<TaskReturnType> => {
+  return customFetchUpdate(`/task`, body);
 };

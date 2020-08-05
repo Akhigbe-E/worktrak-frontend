@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { postNewTaskRequest } from "../../util/backendRequests";
 import { setNewTask } from "../../app/slices/newTaskSlice";
 import { setAlertModal } from "../../app/slices/alertModalSlice";
+import { addTaskToOpenedProject } from "../../app/slices/openedProjectTasksSlice";
 
 export interface NewTaskCardPropType {
   sectionID: string | number;
@@ -36,7 +37,7 @@ const NewTaskCard: React.FC<NewTaskCardPropType> = ({
           }, 2000);
           throw new Error("Could not add task");
         } else {
-          dispatch(setNewTask(data));
+          dispatch(addTaskToOpenedProject(data[0]));
           closeAddTaskCard();
           dispatch(setAlertModal({ success, visible: true, message }));
           setTimeout(() => {

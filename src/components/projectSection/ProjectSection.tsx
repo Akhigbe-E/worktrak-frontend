@@ -68,10 +68,10 @@ const ProjectSection: React.FC<ProjectSectionPropType> = ({
   };
   return (
     <div className="w-64 flex-col mb-6 mr-10">
-      <div className="flex align-middle mb-4">
+      <div className="flex align-middle mb-3">
         <input
           type="text"
-          className="w-10/12 items-center font-semibold outline-none bg-transparent text-2xl text-white border-0 focus:outline-none block"
+          className="w-10/12 items-center font-medium outline-none bg-transparent text-2xl text-white border-0 focus:outline-none block"
           value={inputtedSectionName}
           onChange={(e) => {
             setInputtedSectionName(e.target.value);
@@ -112,8 +112,8 @@ const ProjectSection: React.FC<ProjectSectionPropType> = ({
           <div
             ref={provided.innerRef}
             {...provided.droppableProps}
-            data-isDraggingOver={snapshot.isDraggingOver}
-            className={`flex-grow p-2 w-full rounded-lg ${
+            data-isdraggingover={snapshot.isDraggingOver}
+            className={`flex-grow w-full rounded-md ${
               snapshot.isDraggingOver ? " bg-gray-500 bg-opacity-25" : ""
             }`}
           >
