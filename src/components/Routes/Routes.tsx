@@ -19,6 +19,7 @@ import FirstScreen from "../FirstScreen/FirstScreen";
 import Layout from "../layout/Layout";
 import AssignedTasks from "../assignedTasks/AssignedTasks";
 import ProjectDetail from "../projectDetails/ProjectDetail";
+import ProjectDetailLayout from "../layout/ProjectDetailLayout";
 
 const Routes: React.FC = () => {
   return (
@@ -43,9 +44,9 @@ const Routes: React.FC = () => {
               <Route
                 path={PROJECT}
                 render={() => (
-                  <Layout>
+                  <ProjectDetailLayout>
                     <ProjectDetail />
-                  </Layout>
+                  </ProjectDetailLayout>
                 )}
               />
             </>

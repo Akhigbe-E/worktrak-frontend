@@ -1,17 +1,19 @@
 import React, { ReactNode } from "react";
 import SideBar from "../sidebar/SideBar";
 
-export interface LayoutProps {
+export interface ProjectDetailLayoutProps {
   children: ReactNode;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const ProjectDetailLayout: React.FC<ProjectDetailLayoutProps> = ({
+  children,
+}) => {
   return (
     <>
       <SideBar />
       {/* <div className="pt-12"></div> */}
       <div
-        className="bg-customBlue-200 pt-12 w-full pr-4"
+        className="bg-customBlue-200 float-left pr-4"
         style={{
           paddingLeft: "17rem",
           minHeight: "100vh",
@@ -23,4 +25,4 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   );
 };
 
-export default Layout;
+export default ProjectDetailLayout;
