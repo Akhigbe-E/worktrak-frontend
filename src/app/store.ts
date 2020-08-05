@@ -12,6 +12,7 @@ import openedProjectReducer from "./slices/openedProjectSlice";
 import openedProjectSectionsReducer from "./slices/openedProjectSectionsSlice";
 import openedProjectTasksReducer from "./slices/openedProjectTasksSlice";
 import tasksInSectionsReducer from "./slices/tasksInSectionsSlice";
+import newTaskReducer from "./slices/newTaskSlice";
 
 const store = configureStore({
   reducer: {
@@ -27,6 +28,7 @@ const store = configureStore({
     openedProjectSections: openedProjectSectionsReducer,
     openedProjectTasks: openedProjectTasksReducer,
     tasksInSections: tasksInSectionsReducer,
+    newTask: newTaskReducer,
   },
 });
 

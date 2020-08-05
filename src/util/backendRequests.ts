@@ -82,8 +82,8 @@ export interface NewTaskInputType {
 export interface TaskDataReturnType {
   id: number;
   title: string;
-  project_id: string | number;
-  section_id: string | number;
+  project_id: number;
+  section_id: number;
 }
 export interface TaskReturnType {
   success: boolean;

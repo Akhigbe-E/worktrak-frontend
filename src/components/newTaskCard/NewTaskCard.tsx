@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { postNewTaskRequest } from "../../util/backendRequests";
+import { setNewTask } from "../../app/slices/newTaskSlice";
 
 export interface NewTaskCardPropType {
   sectionID: string | number;
   projectID: string | number;
-  closeAddTaskCard: boolean;
+  closeAddTaskCard: () => void;
 }
 
 const NewTaskCard: React.FC<NewTaskCardPropType> = ({
@@ -27,7 +28,7 @@ const NewTaskCard: React.FC<NewTaskCardPropType> = ({
         if (!res.success) {
           throw new Error("Could not add task");
         } else {
-          dispatch(addNewTask(res.data[0]));
+          dispatch(setNewTask(res.data));
           closeAddTaskCard();
         }
       });
