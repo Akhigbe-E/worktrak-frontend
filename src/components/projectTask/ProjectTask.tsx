@@ -4,6 +4,8 @@ import ThreeDotsIcon from "../../assets/img/ThreeDots.svg";
 import AddAssigneeIcon from "../../assets/images/assignTeamMember.svg";
 import CompletedIcon from "../../assets/images/completed.svg";
 import { Draggable } from "react-beautiful-dnd";
+import { setCurrentlyOpenedTask } from "../../app/slices/currentlyOpenedTaskSlice";
+import { setIsEditTaskModalOpen } from "../../app/slices/isEditTaskModalOpenSlice";
 // import AddDueDateIcon from "../../assets/img/addDueDateIcon.svg";
 // import ProfileImage from "../../assets/img/profileImage.svg";
 // import DeleteIcon from "../../assets/img/deleteIcon.svg";
@@ -35,19 +37,19 @@ export const ProjectTask: React.FC<ProjectTaskPropType> = ({
   const handleCompletionButtonClick = (isComplete: boolean) => {
     setIsComplete(!isComplete);
   };
-  const handleEditTask = () => {
-    // dispatch(
-    //   setCurrentlyOpenedTask({
-    //     id,
-    //     title,
-    //     description,
-    //     completed,
-    //     due_date,
-    //     section_id,
-    //     memberEmails,
-    //   })
-    // );
-    // dispatch(openEditTaskModal());
+  const handleEditTask = (task: { title: string; id: number }) => {
+    dispatch(
+      setCurrentlyOpenedTask({
+        id,
+        title,
+        description,
+        completed,
+        due_date,
+        section_id,
+        memberEmails,
+      })
+    );
+    dispatch(setIsEditTaskModalOpen(true));
   };
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -79,16 +81,21 @@ export const ProjectTask: React.FC<ProjectTaskPropType> = ({
           data-isdragging={snapshot.isDragging}
           className={`py-4 px-3 w-full mb-4 bg-white rounded-md`}
         >
-          <div className="flex justify-start align-middle items-center">
+          <div
+            className="flex justify-start align-middle items-center"
+            onClick={() => {
+              handleEditTask({ title, id });
+            }}
+          >
             <button
               onClick={(e) => {
                 e.preventDefault();
-                handleCompletionButtonClick(isComplete);
+                // handleCompletionButtonClick(isComplete);
               }}
               className="w-1/12 p-0 mb-1 mr-2 bg-opacity-0 rounded-lg align-middle items-center outline-none focus:outline-none"
             >
               {!isComplete ? (
-                <span className="rounded-full align-middle items-center w-4 h-4 border border-customBlue-100 mr-2 inline-block"></span>
+                <span className="rounded-md align-middle items-center w-4 h-4 border border-orange-500 mr-2 inline-block"></span>
               ) : (
                 <span>
                   <img

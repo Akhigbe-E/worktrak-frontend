@@ -13,6 +13,8 @@ import openedProjectSectionsReducer from "./slices/openedProjectSectionsSlice";
 import openedProjectTasksReducer from "./slices/openedProjectTasksSlice";
 import tasksInSectionsReducer from "./slices/tasksInSectionsSlice";
 import newTaskReducer from "./slices/newTaskSlice";
+import currentlyOpenedTaskReducer from "./slices/currentlyOpenedTaskSlice";
+import isEditTaskModalOpenReducer from "./slices/isEditTaskModalOpenSlice";
 
 const store = configureStore({
   reducer: {
@@ -29,6 +31,8 @@ const store = configureStore({
     openedProjectTasks: openedProjectTasksReducer,
     tasksInSections: tasksInSectionsReducer,
     newTask: newTaskReducer,
+    currentlyOpenedTask: currentlyOpenedTaskReducer,
+    isEditTaskModalOpen: isEditTaskModalOpenReducer,
   },
 });
 
