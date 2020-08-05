@@ -11,6 +11,12 @@ export interface ProjectSectionPropType {
 
 const ProjectSection: React.FC<ProjectSectionPropType> = ({ sectionName }) => {
   const [inputtedSectionName, setInputtedSectionName] = useState(sectionName);
+  const [isAddNewTaskCardOpen, setIsAddNewTaskCardOpen] = useState(false);
+
+  const openAddTaskNewTaskCard = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsAddNewTaskCardOpen(!isAddNewTaskCardOpen);
+  };
   return (
     <div className="w-64 flex-col mb-6 mr-10">
       <div className="flex align-middle mb-4">
@@ -40,11 +46,18 @@ const ProjectSection: React.FC<ProjectSectionPropType> = ({ sectionName }) => {
           boxShadow: "0px 4px 4px #535B67",
         }}
         onClick={(e) => {
-          // openAddTaskCard(e);
+          openAddTaskNewTaskCard(e);
         }}
       >
         <img className="mx-auto" src={AddTaskIcon} alt="add task" />
       </button>
+      {isAddNewTaskCardOpen ? (
+        <AddTaskCard
+          sectionID={id}
+          projectID={projectID}
+          closeAddTaskCard={closeAddTaskCard}
+        />
+      ) : undefined}
     </div>
   );
 };
