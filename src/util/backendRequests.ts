@@ -174,7 +174,7 @@ export const getAssignedTasksRequest = (
 
 export const getTasksBySectionsAndProjectIdRequest = (
   projectID: string | number
-): Promise<TasksReturnType> => customFetchGet(`/tasksbyemail/${projectID}`);
+): Promise<TasksReturnType> => customFetchGet(`/tasks/${projectID}`);
 
 export const getOpenedProjectSectionsRequest = (
   projectID: string | number
