@@ -96,39 +96,41 @@ const ProjectBoard: React.FC<ProjectBoardPropType> = ({ projectID }) => {
       );
     });
   return (
-    <div className="px-4 py-5 bg-customBlue-100 rounded-lg">
-      {/* <DragDropContext onDragEnd={onDragEnd}> */}
-      <div style={{ minHeight: "100vh" }}>
-        <div className="flex flex-no-wrap">
-          {renderSections(tasksInSections)}
-          <button
-            className="bg-white rounded-lg bg-opacity-25 sticky mt-10 mb-5 h-64 w-40 outline-none focus:outline-none"
-            style={{ paddingTop: "2.5px", paddingBottom: "2.5px" }}
-            onClick={(e) => {
-              handleNewSectionButtonClick(
-                {
-                  name: "Click me to edit",
-                  project_id: projectID,
-                },
-                dispatch
-              );
-            }}
-          >
-            <img
-              className="mx-auto w-8 h-8"
-              src={AddSectionIcon}
-              alt="add task"
-            />
-            <p
-              className="block mt-2 text-base font-medium"
-              style={{ color: "#A6A6A6" }}
+    <div className="relative">
+      <div className="px-4 py-5 bg-customBlue-100 rounded-lg ">
+        {/* <DragDropContext onDragEnd={onDragEnd}> */}
+        <div style={{ minHeight: "100vh" }}>
+          <div className="flex flex-no-wrap ml-3">
+            {renderSections(tasksInSections)}
+            <button
+              className="bg-white rounded-lg bg-opacity-25 sticky mt-10 mb-5 h-64 w-40 outline-none focus:outline-none"
+              style={{ paddingTop: "2.5px", paddingBottom: "2.5px" }}
+              onClick={(e) => {
+                handleNewSectionButtonClick(
+                  {
+                    name: "Click me to edit",
+                    project_id: projectID,
+                  },
+                  dispatch
+                );
+              }}
             >
-              Add Section
-            </p>
-          </button>
+              <img
+                className="mx-auto w-8 h-8"
+                src={AddSectionIcon}
+                alt="add task"
+              />
+              <p
+                className="block mt-2 text-base font-semibold"
+                style={{ color: "#A6A6A6" }}
+              >
+                Add Section
+              </p>
+            </button>
+          </div>
         </div>
+        {/* </DragDropContext> */}
       </div>
-      {/* </DragDropContext> */}
     </div>
   );
 };

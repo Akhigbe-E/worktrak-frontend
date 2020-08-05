@@ -125,7 +125,7 @@ const SideBar: React.FC = () => {
   };
 
   return (
-    <div className=" w-64 fixed top-0 left-0 bg-customBlue-300 h-full">
+    <div className="z-30 w-64 fixed top-0 left-0 bg-customBlue-300 h-full">
       <div className="bg-customBlue-400 py-3 px-8 ">
         <img src={WhiteLogoImage} alt="logo" className="w-32" />
       </div>

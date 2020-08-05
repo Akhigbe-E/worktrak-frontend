@@ -45,57 +45,65 @@ const ProjectDetail: React.FC = () => {
   };
   return (
     <>
-      <div className="text-white mb-10">
-        <h3 className="font-bold mb-1">{name}</h3>
-        <p>{description || "There is no description for this project"}</p>
+      <div className="fixed bg-customBlue-200 w-full pt-12 z-20">
+        <div className="max-w-xs" style={{ minWidth: "860px" }}>
+          <div className="text-white mb-8">
+            <h3 className="font-bold mb-1">{name}</h3>
+            <p>{description || "There is no description for this project"}</p>
+          </div>
+          <div className="flex ml-8 text-md text-white font-semibold">
+            <span
+              className={`bg-opacity-0 cursor-pointer mr-6 `}
+              onClick={() => {
+                setActiveTab("board");
+              }}
+            >
+              Board
+              {activeTab === "board" && (
+                <hr className="rounded-full mt-1 border-customGreen-200 border-2" />
+              )}
+            </span>
+            <span
+              className={`bg-opacity-0 cursor-pointer mr-6`}
+              onClick={() => {
+                setActiveTab("timeline");
+              }}
+            >
+              Timeline
+              {activeTab === "timeline" && (
+                <hr className=" rounded-full mt-1 border-customGreen-200 border-2" />
+              )}
+            </span>
+            <span
+              className={`bg-opacity-0 cursor-pointer mr-6`}
+              onClick={() => {
+                setActiveTab("comments");
+              }}
+            >
+              Comments
+              {activeTab === "comments" && (
+                <hr className="rounded-full mt-1 border-customGreen-200 border-2" />
+              )}
+            </span>
+            <span
+              className={`bg-opacity-0 cursor-pointer mr-6`}
+              onClick={() => {
+                setActiveTab("progress");
+              }}
+            >
+              Progress
+              {activeTab === "progress" && (
+                <hr className="rounded-full mt-1 border-customGreen-200 border-2" />
+              )}
+            </span>
+          </div>
+        </div>
       </div>
-      <div className="flex ml-8 text-md text-white font-semibold">
-        <span
-          className={`bg-opacity-0 cursor-pointer mr-6 `}
-          onClick={() => {
-            setActiveTab("board");
-          }}
-        >
-          Board
-          {activeTab === "board" && (
-            <hr className="rounded-full mt-1 border-customGreen-200 border-2" />
-          )}
-        </span>
-        <span
-          className={`bg-opacity-0 cursor-pointer mr-6`}
-          onClick={() => {
-            setActiveTab("timeline");
-          }}
-        >
-          Timeline
-          {activeTab === "timeline" && (
-            <hr className=" rounded-full mt-1 border-customGreen-200 border-2" />
-          )}
-        </span>
-        <span
-          className={`bg-opacity-0 cursor-pointer mr-6`}
-          onClick={() => {
-            setActiveTab("comments");
-          }}
-        >
-          Comments
-          {activeTab === "comments" && (
-            <hr className="rounded-full mt-1 border-customGreen-200 border-2" />
-          )}
-        </span>
-        <span
-          className={`bg-opacity-0 cursor-pointer mr-6`}
-          onClick={() => {
-            setActiveTab("progress");
-          }}
-        >
-          Progress
-          {activeTab === "progress" && (
-            <hr className="rounded-full mt-1 border-customGreen-200 border-2" />
-          )}
-        </span>
+      <div className="max-w-full z-0 float-right overflow-x-visible">
+        <div style={{ paddingTop: "11.65rem" }}>
+          {renderActiveTab(activeTab)}
+        </div>
       </div>
-      {renderActiveTab(activeTab)}
     </>
   );
 };
