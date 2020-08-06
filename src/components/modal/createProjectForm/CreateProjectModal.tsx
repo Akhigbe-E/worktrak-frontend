@@ -34,7 +34,7 @@ const CreateProjectModal: React.FC = () => {
 
   return (
     <div
-      className="absolute m-auto top-0 bottom-0 right-0 left-0 z-50 py-8 px-10 rounded-lg bg-customBlue-300"
+      className="absolute z-50 m-auto top-0 bottom-0 right-0 left-0 z-50 py-8 px-10 rounded-lg bg-customBlue-300"
       style={{
         width: "40rem",
         height: "26rem",

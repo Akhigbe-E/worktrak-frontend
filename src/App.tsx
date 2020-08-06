@@ -5,13 +5,22 @@ import { useSelector } from "react-redux";
 import { RootState } from "./app/store";
 import Modal from "./components/modal/Modal";
 import CreateProjectModal from "./components/modal/createProjectForm/CreateProjectModal";
+import EditTaskModal, {
+  EditTaskModalPropType,
+} from "./components/modal/editTaskForm/EditTaskModal";
 
 function App() {
   const alertModal = useSelector((state: RootState) => state.alertModal);
   const isCreateProjectModalOpen = useSelector(
     (state: RootState) => state.isCreateProjectModalOpen
   );
-  console.log(isCreateProjectModalOpen);
+  const isEditTaskModalOpen = useSelector(
+    (state: RootState) => state.isEditTaskModalOpen
+  );
+  const currentlyOpenedTask: EditTaskModalPropType = useSelector(
+    (state: RootState) => state.currentlyOpenedTask
+  );
+  console.log(currentlyOpenedTask);
   return (
     <>
       {alertModal.visible && (
@@ -27,6 +36,11 @@ function App() {
       {isCreateProjectModalOpen && (
         <Modal>
           <CreateProjectModal />
+        </Modal>
+      )}
+      {isEditTaskModalOpen && (
+        <Modal>
+          <EditTaskModal {...currentlyOpenedTask} />
         </Modal>
       )}
       <Routes />

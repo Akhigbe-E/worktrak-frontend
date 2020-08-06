@@ -2,7 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const currentlyOpenedTaskSlice = createSlice({
   name: "currentlyOpenedTask",
-  initialState: {},
+  initialState: {
+    id: 0,
+    title: "",
+    description: "",
+    completed: false,
+    due_date: "",
+    section_id: 0,
+    memberEmails: [],
+  },
   reducers: {
     setCurrentlyOpenedTask: (state, action) => action.payload,
   },

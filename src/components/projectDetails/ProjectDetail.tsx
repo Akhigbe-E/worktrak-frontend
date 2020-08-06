@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getProjectRequest } from "../../util/backendRequests";
+import { useParams, useHistory } from "react-router-dom";
+import {
+  getProjectRequest,
+  getMemberProjectsRequest,
+} from "../../util/backendRequests";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpenedProject } from "../../app/slices/openedProjectSlice";
 import { RootState } from "../../app/store";
@@ -10,21 +13,83 @@ import ProjectBoard from "../projectBoard/ProjectBoard";
 import ProjectTimeline from "../projectTimeline/ProjectTimeline";
 import ProjectComments from "../projectComments/ProjectComments";
 import ProjectStatus from "../projectStatus/ProjectStatus";
+import { arrayToObject } from "../../util/util";
+import { setTeamIdOfOpenedProject } from "../../app/slices/teamIdOfOpenedProjectSlice";
+import { setAlertModal } from "../../app/slices/alertModalSlice";
 
 const ProjectDetail: React.FC = () => {
   const { projectID } = useParams();
+  const dispatch = useDispatch();
+  const history = useHistory();
   const openedProject: ProjectType = useSelector(
     (state: RootState) => state.openedProject
   );
   const [activeTab, setActiveTab] = useState("board");
   const [isLoading, setIsLoading] = useState(true);
-  const dispatch = useDispatch();
+  // useEffect(() => {
+  //   getProjectRequest(projectID).then(({ data }) => {
+  //     dispatch(setOpenedProject(data));
+  //     setIsLoading(false);
+  //   });
+  // }, [projectID]);
+
   useEffect(() => {
-    getProjectRequest(projectID).then(({ data }) => {
-      dispatch(setOpenedProject(data));
-      setIsLoading(false);
-    });
+    const email = localStorage.getItem("email") || "";
+    getMemberProjectsRequest(email)
+      .then(
+        ({ data }) => {
+          const projectDetails = arrayToObject(data, "project_id")[projectID];
+          if (!projectDetails) {
+            throw Error(
+              `You are not a member of the team that created the project`
+            );
+          }
+          dispatch(setOpenedProject(projectDetails));
+          dispatch(setTeamIdOfOpenedProject(projectDetails.team_id));
+          setIsLoading(false);
+        },
+        (error) => {
+          dispatch(
+            setAlertModal({
+              success: false,
+              visible: true,
+              message: "Something went wrong",
+            })
+          );
+          setTimeout(() => {
+            dispatch(
+              setAlertModal({
+                success: false,
+                visible: false,
+                message: "",
+              })
+            );
+          }, 2000);
+          // dispatch(neutralAlert());
+          history.push("/dashboard");
+        }
+      )
+      .catch((error) => {
+        dispatch(
+          setAlertModal({
+            success: false,
+            visible: true,
+            message: "Something went wrong",
+          })
+        );
+        setTimeout(() => {
+          dispatch(
+            setAlertModal({
+              success: false,
+              visible: false,
+              message: "",
+            })
+          );
+        }, 2000);
+        history.push("/dashboard");
+      });
   }, [projectID]);
+
   if (isLoading) return <Loader />;
   const { name, description } = openedProject;
 

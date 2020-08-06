@@ -18,7 +18,7 @@ export const isAuthenticated = () => {
   return returnValue;
 };
 
-export const arrayToObject = (array: Array<any>, keyField: string): object =>
+export const arrayToObject = (array: Array<any>, keyField: string): any =>
   array.reduce((obj, item) => {
     obj[item[keyField]] = item;
     return obj;

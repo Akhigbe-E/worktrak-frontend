@@ -45,7 +45,7 @@ export interface GetTeamRequestReturnType {
 }
 export interface GetProjectRequestReturnType {
   success: boolean;
-  data: Array<ProjectType>;
+  data: ProjectType[];
 }
 export interface GetJoinedTeamsRequestReturnType {
   success: boolean;
@@ -107,6 +107,12 @@ export interface SectionReturnType {
   success: boolean;
   message: string;
   data: SectionsDataReturnType[];
+}
+
+export interface TeamMembersReturnType {
+  success: boolean;
+  message: string;
+  data: [{ member_email: string }];
 }
 
 const customFetchGet = async (endpoint: string) => {
@@ -196,6 +202,15 @@ export const getTasksBySectionsAndProjectIdRequest = (
 export const getOpenedProjectSectionsRequest = (
   projectID: string | number
 ): Promise<SectionReturnType> => customFetchGet(`/sections/${projectID}`);
+
+export const getMemberProjectsRequest = (
+  memberEmail: string
+): Promise<GetProjectRequestReturnType> =>
+  customFetchGet(`/memberprojects/${memberEmail}`);
+
+export const getTeamMembersRequest = (
+  teamID: string | number
+): Promise<TeamMembersReturnType> => customFetchGet(`/teammembers/${teamID}`);
 
 export const postNewProjectsRequest = (
   body: NewProjectInputType

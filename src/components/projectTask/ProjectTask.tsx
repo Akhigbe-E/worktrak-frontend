@@ -80,13 +80,11 @@ export const ProjectTask: React.FC<ProjectTaskPropType> = ({
           ref={provided.innerRef}
           data-isdragging={snapshot.isDragging}
           className={`py-4 px-3 w-full mb-4 bg-white rounded-md`}
+          onClick={() => {
+            handleEditTask({ title, id });
+          }}
         >
-          <div
-            className="flex justify-start align-middle items-center"
-            onClick={() => {
-              handleEditTask({ title, id });
-            }}
-          >
+          <div className="flex justify-start align-middle items-center">
             <button
               onClick={(e) => {
                 e.preventDefault();
