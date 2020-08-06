@@ -19,16 +19,18 @@ const EditTaskModal: React.FC<EditTaskModalPropType> = ({
   id,
   title,
   description,
+  memberEmails,
 }) => {
   const [isComplete, setIsComplete] = useState(false);
   const [dueDate, setDueDate] = useState("");
   const [teamMembers, setTeamMembers] = useState([""]);
+  const [assignedMembers, setAssignedMembers] = useState(memberEmails);
 
   const teamIdOfOpenedProject = useSelector(
     (state: RootState) => state.teamIdOfOpenedProject
   );
-
-  const handleAssignMemberClick = () => {};
+  // WHAT HAPPENS WHEN A MEMBER IS SELECTED
+  const handleAssignMemberClick = (e: React.ChangeEvent, id: number) => {};
 
   useEffect(() => {
     getTeamMembersRequest(teamIdOfOpenedProject).then(({ data }) => {
@@ -94,6 +96,19 @@ const EditTaskModal: React.FC<EditTaskModalPropType> = ({
                 <option value={teamMember}>{teamMember}</option>
               ))}
           </select>
+          {/* <div className="block flex mb-3">
+            {assignedMembers.map((memberEmail) => (
+              <button
+                onClick={(e) => {
+                  handleDeleteMemberEmail(e.target.value, id);
+                }}
+                value={memberEmail}
+                className="p-0 mr-3 rounded-lg text-xs"
+              >
+                {memberEmail} X
+              </button>
+            ))}
+          </div> */}
         </div>
         <div>
           <label htmlFor="dueDate"></label>
