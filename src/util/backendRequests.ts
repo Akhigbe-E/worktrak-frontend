@@ -286,12 +286,8 @@ export const deleteUnassignMemberRequest = (
   });
 };
 
-export const deleteTaskRequest = (
-  id: number,
-  sectionID: number
-): Promise<any> => {
+export const deleteTaskRequest = (id: number): Promise<any> => {
   return customFetchDelete("/task", {
     id,
-    section_id: sectionID,
   });
 };

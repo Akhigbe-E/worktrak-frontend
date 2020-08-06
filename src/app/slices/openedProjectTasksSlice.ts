@@ -36,7 +36,7 @@ const openedProjectTasksSlice = createSlice({
       ...state,
       [action.payload.id]: action.payload,
     }),
-    deleteTaskInOpenedProject: (state, action: PayloadAction<TaskDataType>) => {
+    deleteTaskInOpenedProject: (state, action: PayloadAction<any>) => {
       let tempState: any = { ...state };
       delete tempState[action.payload.id];
       return { ...tempState };

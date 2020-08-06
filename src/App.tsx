@@ -1,18 +1,24 @@
 import React from "react";
 import "./assets/styles/main.css";
 import Routes from "./components/routes/Routes";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "./app/store";
 import Modal from "./components/modal/Modal";
 import CreateProjectModal from "./components/modal/createProjectForm/CreateProjectModal";
 import EditTaskModal, {
   EditTaskModalPropType,
 } from "./components/modal/editTaskForm/EditTaskModal";
-import { TaskDataReturnType, TaskDataType } from "./util/backendRequests";
+import {
+  TaskDataReturnType,
+  TaskDataType,
+  deleteTaskRequest,
+} from "./util/backendRequests";
 import { TasksType } from "./components/tasks/Tasks";
+import { deleteTaskInOpenedProject } from "./app/slices/openedProjectTasksSlice";
 
 function App() {
   const alertModal = useSelector((state: RootState) => state.alertModal);
+  const dispatch = useDispatch();
   const isCreateProjectModalOpen = useSelector(
     (state: RootState) => state.isCreateProjectModalOpen
   );
@@ -34,10 +40,10 @@ function App() {
       "Kindly confirm that you want to delete this Task"
     );
     if (!proceedWithDeletion) return;
-    // deleteTask(id.id).then((res) => {
-    //   const tid = id.id;
-    //   dispatch(deleteSelectedTask({ tid, sectionID }));
-    // });
+    deleteTaskRequest(id).then((res) => {
+      dispatch(deleteTaskInOpenedProject({ id, sectionID }));
+    });
+    window.location.reload();
   };
   return (
     <>
