@@ -38,11 +38,12 @@ const EditTaskModal: React.FC<EditTaskModalPropType> = ({
     id: number
   ) => {
     e.preventDefault();
-    postAssignMemberToTaskRequest({ member_email: e.target.value, id }).then(
-      ({ data }) => {
-        setAssignedMembers([...assignedMembers, data[0]]);
-      }
-    );
+    postAssignMemberToTaskRequest({
+      member_email: e.target.value,
+      task_id: id,
+    }).then(({ data }) => {
+      setAssignedMembers([...assignedMembers, data[0]]);
+    });
   };
 
   useEffect(() => {
@@ -109,11 +110,11 @@ const EditTaskModal: React.FC<EditTaskModalPropType> = ({
                 <option value={teamMember}>{teamMember}</option>
               ))}
           </select>
-          {/* <div className="block flex mb-3">
+          <div className="flex mb-3">
             {assignedMembers.map((memberEmail) => (
               <button
                 onClick={(e) => {
-                  handleDeleteMemberEmail(e.target.value, id);
+                  //   handleDeleteMemberEmail(e.target.value, id);
                 }}
                 value={memberEmail}
                 className="p-0 mr-3 rounded-lg text-xs"
@@ -121,7 +122,7 @@ const EditTaskModal: React.FC<EditTaskModalPropType> = ({
                 {memberEmail} X
               </button>
             ))}
-          </div> */}
+          </div>
         </div>
         <div>
           <label htmlFor="dueDate"></label>
