@@ -34,7 +34,7 @@ const EditTaskModal: React.FC<EditTaskModalPropType> = ({
   handleDeleteTask,
 }) => {
   const [isComplete, setIsComplete] = useState(completed);
-  const [dueDate, setDueDate] = useState(due_date);
+  const [dueDate, setDueDate] = useState(due_date || "");
   const [teamMembers, setTeamMembers] = useState([""]);
   const [assignedMembers, setAssignedMembers] = useState(memberEmails);
   const [taskDescription, setTaskDescription] = useState(description);
@@ -207,7 +207,10 @@ const EditTaskModal: React.FC<EditTaskModalPropType> = ({
         </div>
         <div className="flex mt-10">
           <button
-            onClick={() => handleDeleteTask(id, section_id)}
+            onClick={(e: React.MouseEvent) => {
+              e.preventDefault();
+              handleDeleteTask(id, section_id);
+            }}
             className="w-1/2 border border-red-500 py-3 font-semibold rounded-md mr-2 text-white hover:bg-red-300"
           >
             DELETE TASK

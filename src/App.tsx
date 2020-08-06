@@ -29,6 +29,7 @@ function App() {
     memberEmails: any[];
   } = useSelector((state: RootState) => state.currentlyOpenedTask);
   const deleteTask = (id: number, sectionID: number) => {
+    console.log(id, sectionID);
     const proceedWithDeletion = window.confirm(
       "Kindly confirm that you want to delete this Task"
     );
