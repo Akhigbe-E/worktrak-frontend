@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 
 import CompletedIcon from "../../../assets/images/completed.svg";
-import { getTeamMembersRequest } from "../../../util/backendRequests";
+import {
+  getTeamMembersRequest,
+  postAssignMemberToTaskRequest,
+} from "../../../util/backendRequests";
 import { RootState } from "../../../app/store";
 import { useSelector } from "react-redux";
 
@@ -30,7 +33,17 @@ const EditTaskModal: React.FC<EditTaskModalPropType> = ({
     (state: RootState) => state.teamIdOfOpenedProject
   );
   // WHAT HAPPENS WHEN A MEMBER IS SELECTED
-  const handleAssignMemberClick = (e: React.ChangeEvent, id: number) => {};
+  const handleAssignMemberClick = (
+    e: React.ChangeEvent<HTMLSelectElement>,
+    id: number
+  ) => {
+    e.preventDefault();
+    postAssignMemberToTaskRequest({ member_email: e.target.value, id }).then(
+      ({ data }) => {
+        setAssignedMembers([...assignedMembers, data[0]]);
+      }
+    );
+  };
 
   useEffect(() => {
     getTeamMembersRequest(teamIdOfOpenedProject).then(({ data }) => {

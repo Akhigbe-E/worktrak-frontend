@@ -232,6 +232,14 @@ export const postNewTaskRequest = (
   return customFetchPost(`/task`, body);
 };
 
+export const postAssignMemberToTaskRequest = (body: {
+  member_email: string;
+  id: number;
+}): Promise<TeamMembersReturnType> => {
+  console.log(body);
+  return customFetchPost(`/assignmember`, body);
+};
+
 export const updateTaskRequest = (
   body: NewTaskInputType
 ): Promise<TaskReturnType> => {
