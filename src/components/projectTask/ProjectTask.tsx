@@ -19,7 +19,6 @@ export interface ProjectTaskPropType {
   due_date: string;
   section_id: number;
   index: number;
-  handleDeleteTask: (tid: number) => void;
 }
 
 export const ProjectTask: React.FC<ProjectTaskPropType> = ({
@@ -30,7 +29,6 @@ export const ProjectTask: React.FC<ProjectTaskPropType> = ({
   due_date,
   section_id,
   index,
-  handleDeleteTask,
 }) => {
   const [memberEmails, setMemberEmails] = useState([""]);
   const [isComplete, setIsComplete] = useState(completed);

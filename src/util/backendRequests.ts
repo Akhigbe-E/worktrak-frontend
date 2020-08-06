@@ -291,3 +291,9 @@ export const deleteTaskRequest = (id: number): Promise<any> => {
     id,
   });
 };
+
+export const deleteSectionRequest = (id: number): Promise<any> => {
+  return customFetchDelete("/section", {
+    id,
+  });
+};

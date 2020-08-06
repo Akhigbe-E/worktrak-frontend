@@ -3,8 +3,11 @@ import DeleteIcon from "../../assets/images/deleteIcon.svg";
 import AddTaskIcon from "../../assets/images/addInProjectBoard.svg";
 import NewTaskCard from "../newTaskCard/NewTaskCard";
 import { Droppable } from "react-beautiful-dnd";
-import { TaskDataType } from "../../util/backendRequests";
+import { TaskDataType, deleteSectionRequest } from "../../util/backendRequests";
 import { ProjectTask } from "../projectTask/ProjectTask";
+import { deleteTaskInOpenedProject } from "../../app/slices/openedProjectTasksSlice";
+import { deleteSectionInOpenedProject } from "../../app/slices/openedProjectSectionsSlice";
+import { useDispatch } from "react-redux";
 
 export interface ProjectSectionPropType {
   id: number;
@@ -22,6 +25,8 @@ const ProjectSection: React.FC<ProjectSectionPropType> = ({
   const [inputtedSectionName, setInputtedSectionName] = useState(sectionName);
   const [isAddNewTaskCardOpen, setIsAddNewTaskCardOpen] = useState(false);
 
+  const dispatch = useDispatch();
+
   const openAddTaskNewTaskCard = (e: React.MouseEvent) => {
     e.preventDefault();
     setIsAddNewTaskCardOpen(!isAddNewTaskCardOpen);
@@ -29,15 +34,14 @@ const ProjectSection: React.FC<ProjectSectionPropType> = ({
   const closeAddTaskCard = () => {
     setIsAddNewTaskCardOpen(false);
   };
-  const handleDeleteTask = (id: number, sectionID: number) => {
+  const handleDeleteSection = (id: number) => {
     const proceedWithDeletion = window.confirm(
-      "Kindly confirm that you want to delete this Task"
+      "Kindly confirm that you want to delete this Section"
     );
-    // if (!proceedWithDeletion) return;
-    // deleteTask(id.id).then((res) => {
-    //   const tid = id.id;
-    //   dispatch(deleteSelectedTask({ tid, sectionID }));
-    // });
+    if (!proceedWithDeletion) return;
+    deleteSectionRequest(id).then((res) => {
+      dispatch(deleteSectionInOpenedProject({ id }));
+    });
   };
   const renderFilteredTasks = (
     id: number,
@@ -54,9 +58,6 @@ const ProjectSection: React.FC<ProjectSectionPropType> = ({
       <div>
         {tasks.map((task, index) => (
           <ProjectTask
-            handleDeleteTask={(tid: number) => {
-              handleDeleteTask(tid, id);
-            }}
             key={`${task.id}`}
             {...task}
             section_id={id}
@@ -80,7 +81,7 @@ const ProjectSection: React.FC<ProjectSectionPropType> = ({
         <button
           onClick={(e) => {
             e.preventDefault();
-            // handleDeleteSection(id);
+            handleDeleteSection(id);
           }}
           className="w-2/12 items-center p-0 bg-opacity-0 rounded-lg"
         >

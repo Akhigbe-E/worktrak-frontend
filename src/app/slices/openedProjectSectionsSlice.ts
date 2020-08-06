@@ -23,10 +23,7 @@ const openedProjectSectionsSlice = createSlice({
       ...state,
       [action.payload.id]: action.payload,
     }),
-    deleteSectionInOpenedProject: (
-      state,
-      action: PayloadAction<SectionsDataReturnType>
-    ) => {
+    deleteSectionInOpenedProject: (state, action: PayloadAction<any>) => {
       let tempState: any = { ...state };
       delete tempState[action.payload.id];
       return { ...tempState };
