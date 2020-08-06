@@ -20,6 +20,7 @@ export interface EditTaskModalPropType {
   due_date: string;
   section_id: number;
   memberEmails: any[];
+  handleDeleteTask: (id: number, sectionID: number) => void;
 }
 
 const EditTaskModal: React.FC<EditTaskModalPropType> = ({
@@ -30,6 +31,7 @@ const EditTaskModal: React.FC<EditTaskModalPropType> = ({
   completed,
   due_date,
   section_id,
+  handleDeleteTask,
 }) => {
   const [isComplete, setIsComplete] = useState(completed);
   const [dueDate, setDueDate] = useState(due_date);
@@ -204,7 +206,10 @@ const EditTaskModal: React.FC<EditTaskModalPropType> = ({
           ></textarea>
         </div>
         <div className="flex mt-10">
-          <button className="w-1/2 border border-red-500 py-3 font-semibold rounded-md mr-2 text-white hover:bg-red-300">
+          <button
+            onClick={() => handleDeleteTask(id, section_id)}
+            className="w-1/2 border border-red-500 py-3 font-semibold rounded-md mr-2 text-white hover:bg-red-300"
+          >
             DELETE TASK
           </button>
           <button

@@ -8,6 +8,7 @@ export const currentlyOpenedTaskSlice = createSlice({
     description: "",
     completed: false,
     due_date: "",
+    project_id: 0,
     section_id: 0,
     memberEmails: [],
   },

@@ -8,6 +8,8 @@ import CreateProjectModal from "./components/modal/createProjectForm/CreateProje
 import EditTaskModal, {
   EditTaskModalPropType,
 } from "./components/modal/editTaskForm/EditTaskModal";
+import { TaskDataReturnType, TaskDataType } from "./util/backendRequests";
+import { TasksType } from "./components/tasks/Tasks";
 
 function App() {
   const alertModal = useSelector((state: RootState) => state.alertModal);
@@ -17,10 +19,25 @@ function App() {
   const isEditTaskModalOpen = useSelector(
     (state: RootState) => state.isEditTaskModalOpen
   );
-  const currentlyOpenedTask: EditTaskModalPropType = useSelector(
-    (state: RootState) => state.currentlyOpenedTask
-  );
-  console.log(currentlyOpenedTask);
+  const currentlyOpenedTask: {
+    id: number;
+    title: string;
+    description: string;
+    completed: boolean;
+    due_date: string;
+    section_id: number;
+    memberEmails: any[];
+  } = useSelector((state: RootState) => state.currentlyOpenedTask);
+  const deleteTask = (id: number, sectionID: number) => {
+    const proceedWithDeletion = window.confirm(
+      "Kindly confirm that you want to delete this Task"
+    );
+    if (!proceedWithDeletion) return;
+    // deleteTask(id.id).then((res) => {
+    //   const tid = id.id;
+    //   dispatch(deleteSelectedTask({ tid, sectionID }));
+    // });
+  };
   return (
     <>
       {alertModal.visible && (
@@ -40,7 +57,10 @@ function App() {
       )}
       {isEditTaskModalOpen && (
         <Modal>
-          <EditTaskModal {...currentlyOpenedTask} />
+          <EditTaskModal
+            {...currentlyOpenedTask}
+            handleDeleteTask={deleteTask}
+          />
         </Modal>
       )}
       <Routes />
