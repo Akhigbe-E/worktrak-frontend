@@ -76,7 +76,6 @@ const ProjectBoard: React.FC<ProjectBoardPropType> = ({ projectID }) => {
         taskIDs: [...tasksInSections[`${section_id}`].taskIDs, `${id}`],
       };
     });
-    console.log(tasksInSections);
 
     dispatch(setTasksInSections(tasksInSections));
   }, [openedProjectSections, openedProjectTasks]);

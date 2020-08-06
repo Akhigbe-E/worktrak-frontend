@@ -6,6 +6,7 @@ import CompletedIcon from "../../assets/images/completed.svg";
 import { Draggable } from "react-beautiful-dnd";
 import { setCurrentlyOpenedTask } from "../../app/slices/currentlyOpenedTaskSlice";
 import { setIsEditTaskModalOpen } from "../../app/slices/isEditTaskModalOpenSlice";
+import { getAssignedTeamMembersRequest } from "../../util/backendRequests";
 // import AddDueDateIcon from "../../assets/img/addDueDateIcon.svg";
 // import ProfileImage from "../../assets/img/profileImage.svg";
 // import DeleteIcon from "../../assets/img/deleteIcon.svg";
@@ -31,7 +32,7 @@ export const ProjectTask: React.FC<ProjectTaskPropType> = ({
   index,
   handleDeleteTask,
 }) => {
-  const [memberEmails, setMemberEmails] = useState([]);
+  const [memberEmails, setMemberEmails] = useState([""]);
   const [isComplete, setIsComplete] = useState(completed);
   const dispatch = useDispatch();
   const handleCompletionButtonClick = (isComplete: boolean) => {
@@ -54,6 +55,11 @@ export const ProjectTask: React.FC<ProjectTaskPropType> = ({
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     const email = window.localStorage.getItem("email");
+
+    getAssignedTeamMembersRequest(id).then(({ data }) => {
+      let memberEmailArr = data.map(({ member_email }) => member_email);
+      setMemberEmails(memberEmailArr);
+    });
 
     // fetch(`${api_url}/assignedmembers/${id}`, {
     //   method: "GET",

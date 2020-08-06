@@ -79,6 +79,14 @@ export interface NewTaskInputType {
   project_id: string | number;
   section_id: string | number;
 }
+export interface UpdateTaskInputType {
+  id: number;
+  title: string;
+  description?: string;
+  completed: boolean;
+  due_date?: string;
+  section_id: string | number;
+}
 export interface TaskDataReturnType {
   id: number;
   title: string;
@@ -158,6 +166,23 @@ export const customFetchUpdate = async (endpoint: string, body: any) => {
   ).json();
 };
 
+export const customFetchDelete = async (endpoint: string, body: any) => {
+  const token = window.localStorage.getItem("token") || "";
+  const email = window.localStorage.getItem("email") || "";
+
+  return await (
+    await fetch(`${HOST}${endpoint}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+        useremail: email,
+      },
+      body: JSON.stringify({ ...body }),
+    })
+  ).json();
+};
+
 export const loginRequest = async (
   body: LoginBodyType
 ): Promise<ReturnType> => {
@@ -212,6 +237,11 @@ export const getTeamMembersRequest = (
   teamID: string | number
 ): Promise<TeamMembersReturnType> => customFetchGet(`/teammembers/${teamID}`);
 
+export const getAssignedTeamMembersRequest = (
+  teamID: string | number
+): Promise<TeamMembersReturnType> =>
+  customFetchGet(`/assignedmembers/${teamID}`);
+
 export const postNewProjectsRequest = (
   body: NewProjectInputType
 ): Promise<PostNewProjectReturnType> => {
@@ -241,7 +271,17 @@ export const postAssignMemberToTaskRequest = (body: {
 };
 
 export const updateTaskRequest = (
-  body: NewTaskInputType
+  body: UpdateTaskInputType
 ): Promise<TaskReturnType> => {
   return customFetchUpdate(`/task`, body);
+};
+
+export const deleteUnassignMemberRequest = (
+  email: string,
+  taskID: number
+): Promise<any> => {
+  return customFetchDelete("/assignedmember", {
+    member_email: email,
+    task_id: taskID,
+  });
 };
