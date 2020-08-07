@@ -16,6 +16,7 @@ import {
 import { TasksType } from "./components/tasks/Tasks";
 import { deleteTaskInOpenedProject } from "./app/slices/openedProjectTasksSlice";
 import CreateTeamModal from "./components/modal/createTeamForm/CreateTeamModal";
+import { setIsEditTaskModalOpen } from "./app/slices/isEditTaskModalOpenSlice";
 
 function App() {
   const alertModal = useSelector((state: RootState) => state.alertModal);
@@ -47,7 +48,8 @@ function App() {
     deleteTaskRequest(id).then((res) => {
       dispatch(deleteTaskInOpenedProject({ id, sectionID }));
     });
-    window.location.reload();
+    dispatch(setIsEditTaskModalOpen(false));
+    // window.location.reload();
   };
   return (
     <>
