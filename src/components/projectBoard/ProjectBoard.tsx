@@ -52,6 +52,10 @@ const ProjectBoard: React.FC<ProjectBoardPropType> = ({ projectID }) => {
       dispatch(setOpenedProjectSections(data));
       setOpenedProjectSectionsHasLoaded(true);
     });
+    return () => {
+      dispatch(setOpenedProjectSections([]));
+      setOpenedProjectSectionsHasLoaded(false);
+    };
   }, [projectID]);
 
   useEffect(() => {
@@ -60,6 +64,10 @@ const ProjectBoard: React.FC<ProjectBoardPropType> = ({ projectID }) => {
       dispatch(setOpenedProjectTasks(data));
       setOpenedProjectTasksHasLoaded(true);
     });
+    return () => {
+      dispatch(setOpenedProjectTasks([]));
+      setOpenedProjectTasksHasLoaded(false);
+    };
   }, [projectID]);
 
   useEffect(() => {
@@ -67,17 +75,22 @@ const ProjectBoard: React.FC<ProjectBoardPropType> = ({ projectID }) => {
     let tasksInSections: any = {};
     Object.values(openedProjectSections).forEach(({ id, name }) => {
       tasksInSections[id] = { id, sectionName: name, taskIDs: [] };
+      console.log(openedProjectTasks);
     });
     if (Object.keys(tasksInSections).length === 0) return;
     Object.values(openedProjectTasks).forEach((task) => {
+      console.log(openedProjectTasks);
       const { section_id, id } = task;
       tasksInSections[`${section_id}`] = {
         ...tasksInSections[`${section_id}`],
         taskIDs: [...tasksInSections[`${section_id}`].taskIDs, `${id}`],
       };
     });
-
     dispatch(setTasksInSections(tasksInSections));
+
+    return () => {
+      dispatch(setTasksInSections({}));
+    };
   }, [openedProjectSections, openedProjectTasks]);
 
   const renderSections = (tasksInSections: {
