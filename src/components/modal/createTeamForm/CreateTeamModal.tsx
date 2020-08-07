@@ -1,8 +1,12 @@
 import React, { useState } from "react";
+import { handleCreateTeamClick } from "./createTeamModalFunctions";
+import { useDispatch } from "react-redux";
 
 const CreateTeamModal: React.FC = () => {
   const [teamName, setTeamName] = useState("");
   const [teamDescription, setTeamDescription] = useState("");
+
+  const dispatch = useDispatch();
   return (
     <div
       className="absolute z-50 m-auto overflow-y-scroll top-0 bottom-0 right-0 left-0 py-8 px-10 rounded-lg bg-customBlue-300"
@@ -53,13 +57,7 @@ const CreateTeamModal: React.FC = () => {
         <button
           onClick={(e) => {
             e.preventDefault();
-            // handleAddProjectClick(
-            //   dispatch,
-            //   projectName,
-            //   teamID,
-            //   projectDescription,
-            //   userEmail
-            // );
+            handleCreateTeamClick(dispatch, teamName, teamDescription);
           }}
           className="w-full mx-auto block text-base font-bold border border-customGreen-200 py-3 text-customGreen-200 rounded-lg outline-none focus:bg-customGreen-200 focus:text-white focus:outline-none"
         >

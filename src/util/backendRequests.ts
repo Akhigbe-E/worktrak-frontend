@@ -242,6 +242,16 @@ export const getAssignedTeamMembersRequest = (
 ): Promise<TeamMembersReturnType> =>
   customFetchGet(`/assignedmembers/${teamID}`);
 
+export const postCreateTeamRequest = (
+  name: string,
+  description: string
+): Promise<any> => customFetchPost("/team", { name, description });
+
+export const postAddTeamMemberRequest = (
+  member_email: string,
+  team_id: number
+): Promise<any> => customFetchPost("/teammember", { member_email, team_id });
+
 export const postNewProjectsRequest = (
   body: NewProjectInputType
 ): Promise<PostNewProjectReturnType> => {
