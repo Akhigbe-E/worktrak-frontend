@@ -57,7 +57,7 @@ const SideBar: React.FC = () => {
           .filter((id) => joinedTeams.includes(parseInt(id, 10)))
           .map((teamIndex, index) => {
             return (
-              <li className="text-xl mb-6 list-none" key={index}>
+              <li className="text-xl mb-4 list-none" key={index}>
                 <NavLink
                   className={"w-full flex text-base py-2 pl-6  text-white "}
                   activeClassName="bg-opacity-50 bg-black"
