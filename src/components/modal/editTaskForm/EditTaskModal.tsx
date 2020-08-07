@@ -290,7 +290,7 @@ function useOutsideAlerter(ref: any) {
      */
     function handleClickOutside(event: any) {
       if (ref.current && !ref.current.contains(event.target)) {
-        dispatch(setIsCreateProjectModalOpen(false));
+        dispatch(setIsEditTaskModalOpen(false));
       }
     }
 
