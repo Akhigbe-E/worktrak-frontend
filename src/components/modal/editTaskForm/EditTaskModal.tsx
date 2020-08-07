@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import CompletedIcon from "../../../assets/images/completed.svg";
 import UnassignMemberIcon from "../../../assets/images/unassignMember.svg";
@@ -107,8 +107,13 @@ const EditTaskModal: React.FC<EditTaskModalPropType> = ({
     });
     dispatch(setIsEditTaskModalOpen(false));
   };
+
+  const wrapperRef = useRef(null);
+  useOutsideAlerter(wrapperRef);
+
   return (
     <div
+      ref={wrapperRef}
       className="absolute z-50 m-auto overflow-y-scroll top-0 bottom-0 right-0 left-0 py-8 px-10 rounded-lg bg-customBlue-300"
       style={{
         width: "40rem",
@@ -277,4 +282,25 @@ const AssignedMember: React.FC<{
   );
 };
 
+function useOutsideAlerter(ref: any) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    /**
+     * Alert if clicked on outside of element
+     */
+    function handleClickOutside(event: any) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        dispatch(setIsCreateProjectModalOpen(false));
+      }
+    }
+
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    // document.getElementById('root').appendChild('div').st
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
+}
 export default EditTaskModal;
