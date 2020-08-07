@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import jwt from "jsonwebtoken";
 
@@ -6,6 +6,7 @@ import { RootState } from "../../../app/store";
 import { handleAddProjectClick } from "./createProjectModalFunctions";
 import { isAuthenticated } from "../../../util/util";
 import { setUser } from "../../../app/slices/userSlice";
+import { setIsCreateProjectModalOpen } from "../../../app/slices/isCreateProjectModalOpenSlice";
 
 const CreateProjectModal: React.FC = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,8 @@ const CreateProjectModal: React.FC = () => {
   const [userEmail, setUserEmail] = useState(
     localStorage.getItem("email") || ""
   );
+  const wrapperRef = useRef(null);
+  useOutsideAlerter(wrapperRef);
 
   useEffect(() => {
     const secret = process.env.REACT_APP_SECRET || "";
@@ -34,7 +37,8 @@ const CreateProjectModal: React.FC = () => {
 
   return (
     <div
-      className="absolute z-50 m-auto top-0 bottom-0 right-0 left-0 z-50 py-8 px-10 rounded-lg bg-customBlue-300"
+      ref={wrapperRef}
+      className="absolute m-auto top-0 bottom-0 right-0 left-0 z-50 py-8 px-10 rounded-lg bg-customBlue-300"
       style={{
         width: "40rem",
         height: "26rem",
@@ -108,5 +112,27 @@ const CreateProjectModal: React.FC = () => {
     </div>
   );
 };
+
+function useOutsideAlerter(ref: any) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    /**
+     * Alert if clicked on outside of element
+     */
+    function handleClickOutside(event: any) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        dispatch(setIsCreateProjectModalOpen(false));
+      }
+    }
+
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    // document.getElementById('root').appendChild('div').st
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
+}
 
 export default CreateProjectModal;

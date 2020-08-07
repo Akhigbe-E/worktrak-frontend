@@ -1,6 +1,8 @@
 import { postNewProjectsRequest } from "../../../util/backendRequests";
 import { setAlertModal } from "../../../app/slices/alertModalSlice";
 import { setIsCreateProjectModalOpen } from "../../../app/slices/isCreateProjectModalOpenSlice";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 export const handleAddProjectClick = (
   dispatch: any,
