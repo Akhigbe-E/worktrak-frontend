@@ -1,6 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { handleCreateTeamClick } from "./createTeamModalFunctions";
 import { useDispatch } from "react-redux";
+import { setIsCreateTeamModalOpen } from "../../../app/slices/isCreateTeamModalOpenSlice";
 
 const CreateTeamModal: React.FC = () => {
   const [teamName, setTeamName] = useState("");
@@ -81,7 +82,7 @@ function useOutsideAlerter(ref: any) {
      */
     function handleClickOutside(event: any) {
       if (ref.current && !ref.current.contains(event.target)) {
-        dispatch(setIsCreateProjectModalOpen(false));
+        dispatch(setIsCreateTeamModalOpen(false));
       }
     }
 
