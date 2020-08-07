@@ -17,6 +17,7 @@ import currentlyOpenedTaskReducer from "./slices/currentlyOpenedTaskSlice";
 import isEditTaskModalOpenReducer from "./slices/isEditTaskModalOpenSlice";
 import teamIdOfOpenedProjectReducer from "./slices/teamIdOfOpenedProjectSlice";
 import isCreateTeamModalOpenReducer from "./slices/isCreateTeamModalOpenSlice";
+import isEditProjectModalOpenReducer from "./slices/isEditProjectModalOpenSlice";
 
 const store = configureStore({
   reducer: {
@@ -37,6 +38,7 @@ const store = configureStore({
     newTask: newTaskReducer,
     currentlyOpenedTask: currentlyOpenedTaskReducer,
     teamIdOfOpenedProject: teamIdOfOpenedProjectReducer,
+    isEditProjectModalOpen: isEditProjectModalOpenReducer,
   },
 });
 
