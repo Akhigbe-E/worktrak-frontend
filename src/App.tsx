@@ -12,15 +12,20 @@ import {
   TaskDataReturnType,
   TaskDataType,
   deleteTaskRequest,
+  deleteProjectRequest,
 } from "./util/backendRequests";
 import { TasksType } from "./components/tasks/Tasks";
 import { deleteTaskInOpenedProject } from "./app/slices/openedProjectTasksSlice";
 import CreateTeamModal from "./components/modal/createTeamForm/CreateTeamModal";
 import { setIsEditTaskModalOpen } from "./app/slices/isEditTaskModalOpenSlice";
+import EditProjectModal from "./components/modal/editProjectForm/EditProjectModal";
+import { deleteOpenProject } from "./app/slices/openedProjectSlice";
+import { createHashHistory } from "history";
 
 function App() {
-  const alertModal = useSelector((state: RootState) => state.alertModal);
   const dispatch = useDispatch();
+  const history = createHashHistory();
+  const alertModal = useSelector((state: RootState) => state.alertModal);
   const isCreateProjectModalOpen = useSelector(
     (state: RootState) => state.isCreateProjectModalOpen
   );
@@ -29,6 +34,9 @@ function App() {
   );
   const isCreateTeamModalOpen = useSelector(
     (state: RootState) => state.isCreateTeamModalOpen
+  );
+  const isEditProjectModalOpen = useSelector(
+    (state: RootState) => state.isEditProjectModalOpen
   );
   const currentlyOpenedTask: {
     id: number;
@@ -49,8 +57,18 @@ function App() {
       dispatch(deleteTaskInOpenedProject({ id, sectionID }));
     });
     dispatch(setIsEditTaskModalOpen(false));
-    // window.location.reload();
   };
+  const deleteProject = (project_id: number) => {
+    const confirm = window.confirm(
+      "Kindly confirm that you want to delete this project permanently"
+    );
+    if (!confirm) return;
+    deleteProjectRequest(project_id).then((res) => {
+      dispatch(deleteOpenProject({ project_id }));
+    });
+    window.location.replace(`${`http://localhost:3000`}/dashboard`);
+  };
+
   return (
     <>
       {alertModal.visible && (
@@ -79,6 +97,11 @@ function App() {
             {...currentlyOpenedTask}
             handleDeleteTask={deleteTask}
           />
+        </Modal>
+      )}
+      {isEditProjectModalOpen && (
+        <Modal>
+          <EditProjectModal handleDeleteProjectClick={deleteProject} />
         </Modal>
       )}
       <Routes />

@@ -33,7 +33,6 @@ const CreateProjectModal: React.FC = () => {
       const { email, id } = (decoded as any).data;
     });
   }, []);
-  console.log(userEmail);
 
   return (
     <div

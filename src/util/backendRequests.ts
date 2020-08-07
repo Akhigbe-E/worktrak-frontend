@@ -286,6 +286,10 @@ export const updateTaskRequest = (
   return customFetchUpdate(`/task`, body);
 };
 
+export const updateProjectRequest = (body: ProjectType): Promise<any> => {
+  return customFetchUpdate(`/project`, body);
+};
+
 export const deleteUnassignMemberRequest = (
   email: string,
   taskID: number
@@ -305,5 +309,11 @@ export const deleteTaskRequest = (id: number): Promise<any> => {
 export const deleteSectionRequest = (id: number): Promise<any> => {
   return customFetchDelete("/section", {
     id,
+  });
+};
+
+export const deleteProjectRequest = (project_id: number): Promise<any> => {
+  return customFetchDelete("/project", {
+    project_id,
   });
 };

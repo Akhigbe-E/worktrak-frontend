@@ -17,6 +17,10 @@ import { arrayToObject } from "../../util/util";
 import { setTeamIdOfOpenedProject } from "../../app/slices/teamIdOfOpenedProjectSlice";
 import { setAlertModal } from "../../app/slices/alertModalSlice";
 
+// Pictures
+import SettingsIcon from "../../assets/images/settings.svg";
+import { setIsEditProjectModalOpen } from "../../app/slices/isEditProjectModalOpenSlice";
+
 const ProjectDetail: React.FC = () => {
   const { projectID } = useParams();
   const dispatch = useDispatch();
@@ -26,12 +30,6 @@ const ProjectDetail: React.FC = () => {
   );
   const [activeTab, setActiveTab] = useState("board");
   const [isLoading, setIsLoading] = useState(true);
-  // useEffect(() => {
-  //   getProjectRequest(projectID).then(({ data }) => {
-  //     dispatch(setOpenedProject(data));
-  //     setIsLoading(false);
-  //   });
-  // }, [projectID]);
 
   useEffect(() => {
     const email = localStorage.getItem("email") || "";
@@ -39,6 +37,7 @@ const ProjectDetail: React.FC = () => {
       .then(
         ({ data }) => {
           const projectDetails = arrayToObject(data, "project_id")[projectID];
+          console.log(data);
           if (!projectDetails) {
             throw Error(
               `You are not a member of the team that created the project`
@@ -113,7 +112,17 @@ const ProjectDetail: React.FC = () => {
       <div className="fixed bg-customBlue-200 w-full pl-4 -ml-4 pt-12 z-20">
         <div className="max-w-xs" style={{ minWidth: "860px" }}>
           <div className="text-white mb-8">
-            <h3 className="font-bold mb-1">{name}</h3>
+            <div className="flex">
+              <h3 className="font-bold mb-1 inline-block">{name}</h3>
+              <button
+                onClick={(e) => {
+                  dispatch(setIsEditProjectModalOpen(true));
+                }}
+                className="inline-block ml-2 outline-none focus:outline-none"
+              >
+                <img src={SettingsIcon} alt="project settings" className="" />
+              </button>
+            </div>
             <p>{description || "There is no description for this project"}</p>
           </div>
           <div className="flex ml-8 text-md text-white font-semibold">

@@ -1,16 +1,23 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsCreateTeamModalOpen } from "../../../app/slices/isCreateTeamModalOpenSlice";
+import { useHistory } from "react-router-dom";
 import { handleProjectEditClick } from "./editProjectModalFunctions";
 import { setIsEditProjectModalOpen } from "../../../app/slices/isEditProjectModalOpenSlice";
 import { RootState } from "../../../app/store";
 
-const EditProjectModal: React.FC = () => {
-  const { name, description } = useSelector(
-    (state: RootState) => state.openedProject
+export interface EditProjectModalPropType {
+  handleDeleteProjectClick: (project_id: number) => void;
+}
+
+const EditProjectModal: React.FC<EditProjectModalPropType> = ({
+  handleDeleteProjectClick,
+}) => {
+  const history = useHistory();
+  const openedProject = useSelector((state: RootState) => state.openedProject);
+  const [projectName, setProjectName] = useState(openedProject.name);
+  const [projectDescription, setProjectDescription] = useState(
+    openedProject.description
   );
-  const [projectName, setProjectName] = useState(name);
-  const [projectDescription, setProjectDescription] = useState(description);
 
   const dispatch = useDispatch();
 
@@ -29,7 +36,7 @@ const EditProjectModal: React.FC = () => {
     >
       <div className="flex mb-10">
         <h5 className={`text-white font-semibold inline-block`}>
-          Create a team
+          Edit project
         </h5>
       </div>
       <form>
@@ -65,15 +72,31 @@ const EditProjectModal: React.FC = () => {
             style={{ paddingTop: "0.65rem", paddingBottom: "0.65rem" }}
           ></textarea>
         </div>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            handleProjectEditClick(dispatch, projectName, projectDescription);
-          }}
-          className="w-full mx-auto block text-base font-bold border border-customGreen-200 py-3 text-customGreen-200 rounded-lg outline-none focus:bg-customGreen-200 focus:text-white focus:outline-none"
-        >
-          EDIT PROJECT
-        </button>
+        <div className="flex mt-10">
+          <button
+            onClick={(e: React.MouseEvent) => {
+              e.preventDefault();
+              handleDeleteProjectClick(openedProject.project_id);
+            }}
+            className="w-1/2 border border-red-500 py-3 font-semibold rounded-md mr-2 text-white hover:bg-red-300"
+          >
+            DELETE PROJECT
+          </button>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              handleProjectEditClick(
+                dispatch,
+                openedProject,
+                projectName,
+                projectDescription
+              );
+            }}
+            className="w-full mx-auto block text-base font-bold border border-customGreen-200 py-3 text-customGreen-200 rounded-lg outline-none focus:bg-customGreen-200 focus:text-white focus:outline-none"
+          >
+            EDIT PROJECT
+          </button>
+        </div>
       </form>
     </div>
   );
