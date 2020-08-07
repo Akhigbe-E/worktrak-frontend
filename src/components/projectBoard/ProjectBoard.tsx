@@ -161,7 +161,10 @@ const ProjectBoard: React.FC<ProjectBoardPropType> = ({ projectID }) => {
   };
   return (
     <div className="relative">
-      <div className="px-4 py-6 pt-10 bg-customBlue-100 rounded-lg ">
+      <div
+        className="px-4 py-6 pt-10 bg-customBlue-100 rounded-lg"
+        style={{ minWidth: `${window.innerWidth}px` }}
+      >
         <DragDropContext onDragEnd={onDragEnd}>
           <div style={{ minHeight: "100vh" }}>
             <div className="flex flex-no-wrap ml-3">

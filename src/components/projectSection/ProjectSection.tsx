@@ -49,7 +49,6 @@ const ProjectSection: React.FC<ProjectSectionPropType> = ({
     isDraggingOver: any,
     isAddNewTaskCardOpen: boolean
   ) => {
-    console.log(tasks);
     return tasks.length === 0 && !isAddNewTaskCardOpen ? (
       <span
         className={`bg-white bg-opacity-50 block w-full h-40 rounded-lg`}

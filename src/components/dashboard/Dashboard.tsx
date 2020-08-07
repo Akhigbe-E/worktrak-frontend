@@ -12,6 +12,7 @@ import Loader from "../loader/Loader";
 
 import AddIcon from "../../assets/images/add.svg";
 import { TeamsType } from "../FirstScreen/FirstScreen";
+import { setIsCreateProjectModalOpen } from "../../app/slices/isCreateProjectModalOpenSlice";
 
 export interface DashboardCardsData {
   title: string;
@@ -132,13 +133,20 @@ const Dashboard: React.FC = () => {
         {/* PROJECT TABLE */}
         <div className="mt-6">
           <div className="w-full border border-gray-400 rounded-lg py-4 text-left text-white">
-            <div className="flex align-middle py-1 px-5 items-center">
-              <h5 className="font-medium mb-3  w-full inline-block">
+            <div className="flex align-middle py-1 px-5 mb-3 items-center">
+              <h5 className="font-medium w-full inline-block">
                 Ongoing Projects
               </h5>
-              <span>
-                <img src={AddIcon} alt="add project" className="w-6 h-6" />
-              </span>
+              <button className="">
+                <img
+                  src={AddIcon}
+                  alt="add project"
+                  onClick={() => {
+                    dispatch(setIsCreateProjectModalOpen(true));
+                  }}
+                  className="w-6 h-6"
+                />
+              </button>
             </div>
             <div className="flex py-2 px-5 font-semibold text-base bg-customBlue-100">
               <span className="w-5/12">Project</span>
