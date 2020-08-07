@@ -15,6 +15,7 @@ import {
 } from "./util/backendRequests";
 import { TasksType } from "./components/tasks/Tasks";
 import { deleteTaskInOpenedProject } from "./app/slices/openedProjectTasksSlice";
+import CreateTeamModal from "./components/modal/createTeamForm/CreateTeamModal";
 
 function App() {
   const alertModal = useSelector((state: RootState) => state.alertModal);
@@ -24,6 +25,9 @@ function App() {
   );
   const isEditTaskModalOpen = useSelector(
     (state: RootState) => state.isEditTaskModalOpen
+  );
+  const isCreateTeamModalOpen = useSelector(
+    (state: RootState) => state.isCreateTeamModalOpen
   );
   const currentlyOpenedTask: {
     id: number;
@@ -60,6 +64,11 @@ function App() {
       {isCreateProjectModalOpen && (
         <Modal>
           <CreateProjectModal />
+        </Modal>
+      )}
+      {isCreateTeamModalOpen && (
+        <Modal>
+          <CreateTeamModal />
         </Modal>
       )}
       {isEditTaskModalOpen && (

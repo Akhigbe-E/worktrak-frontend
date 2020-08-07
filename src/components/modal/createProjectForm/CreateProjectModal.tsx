@@ -91,8 +91,6 @@ const CreateProjectModal: React.FC = () => {
         </div>
         <button
           onClick={(e) => {
-            console.log(teamID);
-            console.log(user);
             e.preventDefault();
             handleAddProjectClick(
               dispatch,

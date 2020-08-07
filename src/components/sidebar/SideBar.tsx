@@ -21,6 +21,7 @@ import { setTeamProjects } from "../../app/slices/teamProjectsSlice";
 import { TeamsType } from "../FirstScreen/FirstScreen";
 import { ProjectType } from "../dashboard/Dashboard";
 import { setIsCreateProjectModalOpen } from "../../app/slices/isCreateProjectModalOpenSlice";
+import { setIsCreateTeamModalOpen } from "../../app/slices/isCreateTeamModalOpenSlice";
 
 const SideBar: React.FC = () => {
   const dispatch = useDispatch();
@@ -167,8 +168,12 @@ const SideBar: React.FC = () => {
           >
             TEAMS
           </p>
-          <button className="w-3/6 outline-none focus:outline-none">
-            {/* <span> */}
+          <button
+            onClick={(e) => {
+              dispatch(setIsCreateTeamModalOpen(true));
+            }}
+            className="w-3/6 outline-none focus:outline-none"
+          >
             <img
               src={AddTeamIcon}
               alt="add team"
