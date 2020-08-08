@@ -170,6 +170,7 @@ const ProjectStatus: React.FC<ProjectStatusPropType> = ({ project }) => {
         <div className="flex mt-8">
           <ul className="mr-6" style={{ width: "320px" }}>
             <li
+              key={1}
               className="text-customGreen-300 px-3 py-4 mb-3 rounded-lg block"
               style={{ backgroundColor: "#535461" }}
             >
@@ -195,6 +196,7 @@ const ProjectStatus: React.FC<ProjectStatusPropType> = ({ project }) => {
             </li>
             {/* Incompleted */}
             <li
+              key={2}
               className=""
               style={{ backgroundColor: "#535461", color: "#FCCC63" }}
             >
@@ -202,28 +204,6 @@ const ProjectStatus: React.FC<ProjectStatusPropType> = ({ project }) => {
                 onClick={handleShowIncomplete}
                 className="text-left px-3 py-4 mb-3 rounded-lg block w-full"
               >
-                <hr
-                  className="border-2 rounded-full mb-2"
-                  style={{
-                    borderColor: "#FCCC63",
-                    width: `${
-                      (Object.keys(inCompleteTasks).length /
-                        totalNumberOfTasks) *
-                        290 || 1
-                    }px`,
-                  }}
-                />
-                <p className="text-base">In progress</p>
-                <p className="text-xl font-semibold">
-                  {Object.keys(inCompleteTasks).length}
-                </p>
-              </button>
-            </li>
-            <li
-              className=""
-              style={{ backgroundColor: "#535461", color: "#FCCC63" }}
-            >
-              <button className="text-left px-3 py-4 mb-3 rounded-lg block w-full">
                 <hr
                   className="border-2 rounded-full mb-2"
                   style={{
