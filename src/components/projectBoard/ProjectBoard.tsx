@@ -95,8 +95,9 @@ const ProjectBoard: React.FC<ProjectBoardPropType> = ({ projectID }) => {
 
   const renderSections = (tasksInSections: {
     [id: string]: { id: number; sectionName: string; taskIDs: string[] };
-  }) =>
-    Object.values(tasksInSections).map((section, index) => {
+  }) => {
+    if (tasksInSections.id.id === 0) return;
+    return Object.values(tasksInSections).map((section, index) => {
       const fullTask = section.taskIDs
         .filter((id) => Object.keys(openedProjectTasks).includes(id))
         .map((id) => openedProjectTasks[id]);
@@ -109,6 +110,7 @@ const ProjectBoard: React.FC<ProjectBoardPropType> = ({ projectID }) => {
         />
       );
     });
+  };
   const onDragEnd = (result: any) => {
     const { destination, source, draggableId } = result;
     if (!destination) {

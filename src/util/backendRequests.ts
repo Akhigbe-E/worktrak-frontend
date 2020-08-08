@@ -242,10 +242,20 @@ export const getAssignedTeamMembersRequest = (
 ): Promise<TeamMembersReturnType> =>
   customFetchGet(`/assignedmembers/${teamID}`);
 
+export const getProjectCommentsRequest = (
+  projectID: string | number
+): Promise<any> => customFetchGet(`/comments/${projectID}`);
+
 export const postCreateTeamRequest = (
   name: string,
   description: string
 ): Promise<any> => customFetchPost("/team", { name, description });
+
+export const postProjectCommentRequest = (body: {
+  project_id: number;
+  owner_email: string;
+  content: string;
+}): Promise<any> => customFetchPost("/comment", { ...body });
 
 export const postAddTeamMemberRequest = (
   member_email: string,
