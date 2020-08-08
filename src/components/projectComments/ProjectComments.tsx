@@ -13,6 +13,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { setAlertModal } from "../../app/slices/alertModalSlice";
 import { RootState } from "../../app/store";
+import { setOpenedProjectTasks } from "../../app/slices/openedProjectTasksSlice";
 
 export interface ProjectCommentsPropType {
   projectID: number;
@@ -31,6 +32,7 @@ const ProjectComments: React.FC<ProjectCommentsPropType> = ({ projectID }) => {
     });
     return () => {
       dispatch(setProjectComments([]));
+      dispatch(setOpenedProjectTasks([]));
     };
   }, [projectID]);
 

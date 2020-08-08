@@ -139,7 +139,6 @@ const ProjectStatus: React.FC<ProjectStatusPropType> = ({ project }) => {
       dispatch(setOpenedProjectTasks([]));
     };
   }, [project]);
-  console.log(completedTasks);
   return (
     <div
       className="px-4 bg-customBlue-100 rounded-lg h-full"
