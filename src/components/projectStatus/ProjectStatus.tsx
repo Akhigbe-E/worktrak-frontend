@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { editOpenProject } from "../../app/slices/openedProjectSlice";
 import { RootState } from "../../app/store";
 import { setOpenedProjectTasks } from "../../app/slices/openedProjectTasksSlice";
+import Loader from "../loader/Loader";
 
 export interface ProjectStatusPropType {
   project: ProjectType;
@@ -81,9 +82,45 @@ const ProjectStatus: React.FC<ProjectStatusPropType> = ({ project }) => {
     );
     setTasksToShow({});
   };
+  const renderStatusTasks = (tasks: any, taskStatus: string) => {
+    console.log(tasks);
+    return (
+      <div className="w-full bg-customBlue-200 border border-gray-600 rounded-lg p-5">
+        {/* <span
+          className={`inline-block h-4 w-4 mr-3 rounded-lg 
+            ${taskStatus === "Complete" && "bg-teal-400"}
+            ${taskStatus === "Incomplete" && "bg-primaryred"}
+            ${taskStatus === "Overdue" && "bg-black"}
+            `}
+        ></span> */}
+        <span
+          className={`text-xl font-semibold mb-6 ${
+            taskStatus === "Complete" && "text-customGreen-300"
+          }`}
+          style={{
+            color: `${taskStatus === "Incomplete" && "#FCCC63"}`,
+          }}
+        >
+          {taskStatus}
+        </span>
+        <ul className="pt-2">
+          {tasks.map((task: any, index: number) => (
+            <li
+              key={index}
+              className="my-2 py-2 pl-6 w-full rounded-lg bg-customBlue-100 text-base text-white"
+            >
+              {task.title}
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  };
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     getTasksBySectionsAndProjectIdRequest(project_id).then(({ data }) => {
       dispatch(setOpenedProjectTasks(data));
+      setIsLoading(false);
     });
     setTotalNumberOfTasks(Object.keys(openedProjectTasks).length);
     const tasks = Object.values(openedProjectTasks).filter(
@@ -102,7 +139,7 @@ const ProjectStatus: React.FC<ProjectStatusPropType> = ({ project }) => {
       dispatch(setOpenedProjectTasks([]));
     };
   }, [project]);
-  console.log(totalNumberOfTasks);
+  console.log(completedTasks);
   return (
     <div
       className="px-4 bg-customBlue-100 rounded-lg h-full"
@@ -130,20 +167,23 @@ const ProjectStatus: React.FC<ProjectStatusPropType> = ({ project }) => {
             <option value="off track">off track</option>
           </select>
         </div>
-        <div className="flex flex-col mt-3">
+        <div className="flex mt-8">
           <ul className="mr-6" style={{ width: "320px" }}>
             <li
               className="text-customGreen-300 px-3 py-4 mb-3 rounded-lg block"
               style={{ backgroundColor: "#535461" }}
             >
-              <button className="text-left">
+              <button
+                onClick={handleShowCompleted}
+                className="text-left w-full"
+              >
                 <hr
                   className="border-2 rounded-full border-customGreen-300 mb-2"
                   style={{
                     width: `${
                       (Object.keys(completedTasks).length /
                         totalNumberOfTasks) *
-                        300 || 1
+                        290 || 1
                     }px`,
                   }}
                 />
@@ -155,27 +195,60 @@ const ProjectStatus: React.FC<ProjectStatusPropType> = ({ project }) => {
             </li>
             {/* Incompleted */}
             <li
-              className="text-customGreen-300 px-3 py-4 mb-3 rounded-lg block"
-              style={{ backgroundColor: "#535461" }}
+              className=""
+              style={{ backgroundColor: "#535461", color: "#FCCC63" }}
             >
-              <button className="text-left">
+              <button
+                onClick={handleShowIncomplete}
+                className="text-left px-3 py-4 mb-3 rounded-lg block w-full"
+              >
                 <hr
-                  className="border-2 rounded-full border-customGreen-300 mb-2"
+                  className="border-2 rounded-full mb-2"
                   style={{
+                    borderColor: "#FCCC63",
                     width: `${
                       (Object.keys(inCompleteTasks).length /
                         totalNumberOfTasks) *
-                        300 || 1
+                        290 || 1
                     }px`,
                   }}
                 />
                 <p className="text-base">In progress</p>
                 <p className="text-xl font-semibold">
-                  {Object.keys(completedTasks).length}
+                  {Object.keys(inCompleteTasks).length}
+                </p>
+              </button>
+            </li>
+            <li
+              className=""
+              style={{ backgroundColor: "#535461", color: "#FCCC63" }}
+            >
+              <button className="text-left px-3 py-4 mb-3 rounded-lg block w-full">
+                <hr
+                  className="border-2 rounded-full mb-2"
+                  style={{
+                    borderColor: "#FCCC63",
+                    width: `${
+                      (Object.keys(inCompleteTasks).length /
+                        totalNumberOfTasks) *
+                        290 || 1
+                    }px`,
+                  }}
+                />
+                <p className="text-base">In progress</p>
+                <p className="text-xl font-semibold">
+                  {Object.keys(inCompleteTasks).length}
                 </p>
               </button>
             </li>
           </ul>
+          <div className="w-full">
+            {isLoading ? (
+              <Loader />
+            ) : (
+              renderStatusTasks(tasksToShow, tasksStatus)
+            )}
+          </div>
         </div>
       </div>
     </div>
