@@ -75,7 +75,6 @@ const ProjectBoard: React.FC<ProjectBoardPropType> = ({ projectID }) => {
     let tasksInSections: any = {};
     Object.values(openedProjectSections).forEach(({ id, name }) => {
       tasksInSections[id] = { id, sectionName: name, taskIDs: [] };
-      console.log(openedProjectTasks);
     });
     if (Object.keys(tasksInSections).length === 0) return;
     Object.values(openedProjectTasks).forEach((task) => {
@@ -96,7 +95,11 @@ const ProjectBoard: React.FC<ProjectBoardPropType> = ({ projectID }) => {
   const renderSections = (tasksInSections: {
     [id: string]: { id: number; sectionName: string; taskIDs: string[] };
   }) => {
-    if (tasksInSections.id.id === 0) return;
+    if (tasksInSections.id) {
+      if (tasksInSections.id.id === 0) {
+        return;
+      }
+    }
     return Object.values(tasksInSections).map((section, index) => {
       const fullTask = section.taskIDs
         .filter((id) => Object.keys(openedProjectTasks).includes(id))
