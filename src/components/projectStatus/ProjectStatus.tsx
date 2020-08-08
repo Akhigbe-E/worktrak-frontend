@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { ProjectType } from "../dashboard/Dashboard";
 import { handleEditProjectClick } from "./projectStatusFunctions";
+import { updateProjectRequest } from "../../util/backendRequests";
+import { useDispatch } from "react-redux";
+import { editOpenProject } from "../../app/slices/openedProjectSlice";
 
 export interface ProjectStatusPropType {
   project: ProjectType;
@@ -39,8 +42,17 @@ const renderStatusText = (status: string) => {
       break;
   }
 };
-const ProjectStatus: React.FC<ProjectStatusPropType> = () => {
+const ProjectStatus: React.FC<ProjectStatusPropType> = ({ project }) => {
+  const { project_id, status } = project;
+  const dispatch = useDispatch();
   const [inputtedStatus, setInputtedStatus] = useState("on track");
+  const handleEditProjectClick = (status: string) => {
+    setInputtedStatus(status);
+    updateProjectRequest({ ...project, status }).then((data) => {
+      console.log(data);
+      // dispatch(editOpenProject(data[0]));
+    });
+  };
   return (
     <div
       className="px-4 bg-customBlue-100 rounded-lg h-full"
