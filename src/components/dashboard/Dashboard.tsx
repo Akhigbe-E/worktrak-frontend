@@ -52,29 +52,8 @@ const Dashboard: React.FC = () => {
   }, []);
 
   const renderOnGoingProjects = (onGoingProjects: ProjectType[]) => {
-    return (
-      // onGoingProjects
-      // [
-      //   {
-      //     project_id: 1,
-      //     name: "Make advert",
-      //     team_id: 10,
-      //     status: "In progress",
-      //   },
-      //   {
-      //     project_id: 1,
-      //     name: "Make advert",
-      //     team_id: 10,
-      //     status: "In progress",
-      //   },
-      //   {
-      //     project_id: 1,
-      //     name: "Make advert",
-      //     team_id: 10,
-      //     status: "In progress",
-      //   },
-      // ]
-      teamProjects.map(({ project_id, name, team_id, status }, index) => {
+    return teamProjects.map(
+      ({ project_id, name, team_id, status, creator_email }, index) => {
         return (
           <Link
             to={`/project/${project_id}`}
@@ -84,10 +63,10 @@ const Dashboard: React.FC = () => {
             <span className="w-5/12">{name}</span>
             <span className="w-3/12">{teams[team_id].name}</span>
             <span className="w-2/12">{status}</span>
-            <span className="w-2/12 text-right">Action</span>
+            <span className="w-2/12">{creator_email}</span>
           </Link>
         );
-      })
+      }
     );
   };
 
@@ -152,7 +131,7 @@ const Dashboard: React.FC = () => {
               <span className="w-5/12">Project</span>
               <span className="w-3/12">Team</span>
               <span className="w-2/12">Status</span>
-              <span className="w-2/12 text-right">Action</span>
+              <span className="w-2/12">Created by</span>
             </div>
             {
               // teamProjects.length ? (
