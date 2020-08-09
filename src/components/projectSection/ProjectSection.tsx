@@ -3,10 +3,17 @@ import DeleteIcon from "../../assets/images/deleteIcon.svg";
 import AddTaskIcon from "../../assets/images/addInProjectBoard.svg";
 import NewTaskCard from "../newTaskCard/NewTaskCard";
 import { Droppable } from "react-beautiful-dnd";
-import { TaskDataType, deleteSectionRequest } from "../../util/backendRequests";
+import {
+  TaskDataType,
+  deleteSectionRequest,
+  updateSectionRequest,
+} from "../../util/backendRequests";
 import { ProjectTask } from "../projectTask/ProjectTask";
 import { deleteTaskInOpenedProject } from "../../app/slices/openedProjectTasksSlice";
-import { deleteSectionInOpenedProject } from "../../app/slices/openedProjectSectionsSlice";
+import {
+  deleteSectionInOpenedProject,
+  updateSectionInOpenedProject,
+} from "../../app/slices/openedProjectSectionsSlice";
 import { useDispatch } from "react-redux";
 
 export interface ProjectSectionPropType {
@@ -66,6 +73,11 @@ const ProjectSection: React.FC<ProjectSectionPropType> = ({
       </div>
     );
   };
+  const handleSectionUpdate = (id: number, sectionTitle: string) => {
+    updateSectionRequest({ id, name: sectionTitle }).then(({ data }) => {
+      dispatch(updateSectionInOpenedProject(data[0]));
+    });
+  };
   return (
     <div className="w-64 flex-col mb-6 mr-10">
       <div className="flex align-middle mb-3">
@@ -75,6 +87,9 @@ const ProjectSection: React.FC<ProjectSectionPropType> = ({
           value={inputtedSectionName}
           onChange={(e) => {
             setInputtedSectionName(e.target.value);
+          }}
+          onBlur={() => {
+            handleSectionUpdate(id, inputtedSectionName);
           }}
         />
         <button

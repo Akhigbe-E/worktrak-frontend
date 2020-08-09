@@ -4,10 +4,10 @@ export const membersSlice = createSlice({
   name: "members",
   initialState: [],
   reducers: {
-    setTeamMembers: (state, action) => action.payload,
+    setTeamMembersAction: (state, action) => action.payload,
   },
 });
 
-export const { setTeamMembers } = membersSlice.actions;
+export const { setTeamMembersAction } = membersSlice.actions;
 
 export default membersSlice.reducer;

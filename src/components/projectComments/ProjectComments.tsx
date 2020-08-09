@@ -79,10 +79,19 @@ const ProjectComments: React.FC<ProjectCommentsPropType> = ({ projectID }) => {
         <div className={`flex mb-3`}>
           <img
             src={ProfileImage}
-            className={`w-5.5 mr-2 bg-gray-300 border inline-block rounded-full`}
+            className={`w-6 mr-2 inline-block rounded-full`}
             alt="sender"
           />
-          <span className="mr-3 font-semibold ">{content}</span>
+          <div
+            className={`mb-3 text-left inline-block justify-end bg-customBlue-300 text-white p-2 rounded-full rounded-bl-none`}
+          >
+            <span
+              className="ml-2 w-full font-normal block"
+              style={{ maxWidth: "450px" }}
+            >
+              {content}
+            </span>
+          </div>
         </div>
       ) : (
         <div className="text-right">
@@ -90,7 +99,7 @@ const ProjectComments: React.FC<ProjectCommentsPropType> = ({ projectID }) => {
             className={`mb-3 text-right inline-block justify-end bg-purple-400 text-white p-2 rounded-full rounded-br-none`}
           >
             <span
-              className="mr-2 w-full font-normal block "
+              className="mr-2 w-full font-normal block"
               style={{ maxWidth: "450px" }}
             >
               {content}

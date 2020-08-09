@@ -39,9 +39,13 @@ export interface JoinedTeamDataType {
   teamProjects: string[];
 }
 
-export interface GetTeamRequestReturnType {
+export interface GetTeamsRequestReturnType {
   success: boolean;
   data: Array<TeamDataType>;
+}
+export interface GetTeamRequestReturnType {
+  success: boolean;
+  data: TeamDataType;
 }
 export interface GetProjectRequestReturnType {
   success: boolean;
@@ -197,7 +201,7 @@ export const loginRequest = async (
   ).json();
 };
 
-export const getTeamsRequest = (): Promise<GetTeamRequestReturnType> =>
+export const getTeamsRequest = (): Promise<GetTeamsRequestReturnType> =>
   customFetchGet("/teams");
 
 export const getMembersRequest = (): Promise<any> => customFetchGet("/members");
@@ -306,6 +310,11 @@ export const updateTaskRequest = (
 ): Promise<TaskReturnType> => {
   return customFetchUpdate(`/task`, body);
 };
+
+export const updateSectionRequest = (body: {
+  id: number;
+  name: string;
+}): Promise<SectionReturnType> => customFetchUpdate("/section", body);
 
 export const updateProjectRequest = (body: ProjectType): Promise<any> => {
   return customFetchUpdate(`/project`, body);

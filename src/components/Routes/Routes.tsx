@@ -21,7 +21,7 @@ import Layout from "../layout/Layout";
 import AssignedTasks from "../assignedTasks/AssignedTasks";
 import ProjectDetail from "../projectDetails/ProjectDetail";
 import ProjectDetailLayout from "../layout/ProjectDetailLayout";
-import TeamDetails from "../teamDetails/teamDetails";
+import TeamDetails from "../teamDetails/TeamDetails";
 
 const Routes: React.FC = () => {
   return (
