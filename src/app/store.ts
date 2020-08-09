@@ -19,6 +19,7 @@ import teamIdOfOpenedProjectReducer from "./slices/teamIdOfOpenedProjectSlice";
 import isCreateTeamModalOpenReducer from "./slices/isCreateTeamModalOpenSlice";
 import isEditProjectModalOpenReducer from "./slices/isEditProjectModalOpenSlice";
 import projectCommentsReducer from "./slices/projectCommentsSlice";
+import membersReducer from "./slices/membersSlice";
 
 const store = configureStore({
   reducer: {
@@ -41,6 +42,7 @@ const store = configureStore({
     teamIdOfOpenedProject: teamIdOfOpenedProjectReducer,
     isEditProjectModalOpen: isEditProjectModalOpenReducer,
     projectComments: projectCommentsReducer,
+    members: membersReducer,
   },
 });
 

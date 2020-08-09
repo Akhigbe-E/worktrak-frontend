@@ -200,10 +200,21 @@ export const loginRequest = async (
 export const getTeamsRequest = (): Promise<GetTeamRequestReturnType> =>
   customFetchGet("/teams");
 
+export const getMembersRequest = (): Promise<any> => customFetchGet("/members");
+
+export const getTeamRequest = (
+  teamID: string
+): Promise<GetTeamRequestReturnType> => customFetchGet(`/team/${teamID}`);
+
 export const getProjectRequest = (
   projectID: string
 ): Promise<GetProjectRequestReturnType> =>
   customFetchGet(`/project/${projectID}`);
+
+export const getTeamProjectsRequest = (
+  teamID: string
+): Promise<GetProjectRequestReturnType> =>
+  customFetchGet(`/teamprojects/${teamID}`);
 
 export const createTeamsRequest = ({
   name,
