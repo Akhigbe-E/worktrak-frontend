@@ -8,6 +8,7 @@ import {
   SETUPTEAM,
   ASSIGNEDTASKS,
   PROJECT,
+  TEAM,
 } from "../../util/allEndpoints";
 
 // Components
@@ -20,6 +21,7 @@ import Layout from "../layout/Layout";
 import AssignedTasks from "../assignedTasks/AssignedTasks";
 import ProjectDetail from "../projectDetails/ProjectDetail";
 import ProjectDetailLayout from "../layout/ProjectDetailLayout";
+import TeamDetails from "../teamDetails/teamDetails";
 
 const Routes: React.FC = () => {
   return (
@@ -47,6 +49,14 @@ const Routes: React.FC = () => {
                   <ProjectDetailLayout>
                     <ProjectDetail />
                   </ProjectDetailLayout>
+                )}
+              />
+              <Route
+                path={TEAM}
+                render={() => (
+                  <Layout>
+                    <TeamDetails />
+                  </Layout>
                 )}
               />
             </>
