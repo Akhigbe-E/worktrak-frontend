@@ -13,6 +13,7 @@ import Loader from "../loader/Loader";
 import AddIcon from "../../assets/images/add.svg";
 import { TeamsType } from "../FirstScreen/FirstScreen";
 import { setIsCreateProjectModalOpen } from "../../app/slices/isCreateProjectModalOpenSlice";
+import NavBar from "../navbar/NavBar";
 
 export interface DashboardCardsData {
   title: string;
@@ -78,6 +79,7 @@ const Dashboard: React.FC = () => {
   return (
     <div>
       <SideBar />
+      <NavBar />
       <div
         className="bg-customBlue-200 pt-12 pr-4 w-full"
         style={{

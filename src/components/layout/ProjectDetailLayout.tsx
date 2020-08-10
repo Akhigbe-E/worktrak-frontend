@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import SideBar from "../sidebar/SideBar";
+import NavBar from "../navbar/NavBar";
 
 export interface ProjectDetailLayoutProps {
   children: ReactNode;
@@ -11,6 +12,7 @@ const ProjectDetailLayout: React.FC<ProjectDetailLayoutProps> = ({
   return (
     <>
       <SideBar />
+      <NavBar />
       {/* <div className="pt-12"></div> */}
       <div
         className="bg-customBlue-200 float-left pr-4"
