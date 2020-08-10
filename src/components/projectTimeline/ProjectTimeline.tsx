@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../app/store";
-import { SchedulerData, ViewTypes } from "react-big-scheduler";
-import Scheduler from "react-big-scheduler";
+import { Scheduler, SchedulerData, ViewTypes } from "react-big-scheduler";
 import moment from "moment";
 import withDnDContext from "../../util/withDnDContext";
 import "react-big-scheduler/lib/css/style.css";
@@ -18,7 +17,7 @@ export interface ProjectTimelinePropType {
   projectID: string | number;
 }
 
-const ProjectTimeline: React.FC<ProjectTimelinePropType> = ({ projectID }) => {
+const ProjectTimeline: React.SFC<ProjectTimelinePropType> = ({ projectID }) => {
   const openedProjectSections = useSelector(
     (state: RootState) => state.openedProjectSections
   );
@@ -105,6 +104,7 @@ const ProjectTimeline: React.FC<ProjectTimelinePropType> = ({ projectID }) => {
   const onSelectDate = () => {};
   const onViewChange = () => {};
   const eventClicked = () => {};
+  if (!Scheduler) return null;
   return (
     <div
       className="px-4 bg-customBlue-100 rounded-lg h-full relative text-white"
@@ -120,7 +120,6 @@ const ProjectTimeline: React.FC<ProjectTimelinePropType> = ({ projectID }) => {
           nextClick={nextClick}
           onSelectDate={onSelectDate}
           onViewChange={onViewChange}
-          // eventItemClick={eventClicked}
         />
       </div>
     </div>
