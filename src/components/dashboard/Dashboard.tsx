@@ -112,7 +112,7 @@ const Dashboard: React.FC = () => {
           </div>
           {/* CHART */}
           <div className="w-1/2">
-            <div className="border border-gray-400 rounded-lg w-full my-3 py-3"></div>
+            {/* <div className="border border-gray-400 rounded-lg w-full my-3 py-3"></div> */}
           </div>
         </div>
         {/* PROJECT TABLE */}
