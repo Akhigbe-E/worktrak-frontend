@@ -20,7 +20,7 @@ import { setIsEditTaskModalOpen } from "./app/slices/isEditTaskModalOpenSlice";
 import EditProjectModal from "./components/modal/editProjectForm/EditProjectModal";
 import { deleteOpenProject } from "./app/slices/openedProjectSlice";
 import { createHashHistory } from "history";
-import Routes from "./components/routes/Routes";
+import Routes from "./components/routing/Routes";
 
 function App() {
   const dispatch = useDispatch();
