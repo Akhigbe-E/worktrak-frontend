@@ -1,6 +1,5 @@
 import React from "react";
 import "./assets/styles/main.css";
-import Routes from "./components/routes/Routes";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "./app/store";
 import Modal from "./components/modal/Modal";
@@ -21,6 +20,7 @@ import { setIsEditTaskModalOpen } from "./app/slices/isEditTaskModalOpenSlice";
 import EditProjectModal from "./components/modal/editProjectForm/EditProjectModal";
 import { deleteOpenProject } from "./app/slices/openedProjectSlice";
 import { createHashHistory } from "history";
+import Routes from "./components/routes/Routes";
 
 function App() {
   const dispatch = useDispatch();
