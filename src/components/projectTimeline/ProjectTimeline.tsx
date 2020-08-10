@@ -90,7 +90,6 @@ const ProjectTimeline: React.FC<ProjectTimelinePropType> = ({ projectID }) => {
           bgColor: "#56DE9C",
         });
       });
-    console.log(resources);
     setEvents(events);
     setResources(resources);
   }, [openedProjectTasks, openedProjectSections]);

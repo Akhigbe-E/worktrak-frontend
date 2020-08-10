@@ -20,7 +20,6 @@ export const handleProjectEditClick = (
     name: projectName,
     description: projectDescription,
   }).then(({ data }) => {
-    console.log(data);
     dispatch(editOpenProject(data[0]));
     dispatch(setIsEditProjectModalOpen(false));
   });

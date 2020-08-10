@@ -37,7 +37,6 @@ const ProjectDetail: React.FC = () => {
       .then(
         ({ data }) => {
           const projectDetails = arrayToObject(data, "project_id")[projectID];
-          console.log(data);
           if (!projectDetails) {
             throw Error(
               `You are not a member of the team that created the project`

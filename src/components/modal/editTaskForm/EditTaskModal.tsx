@@ -71,7 +71,6 @@ const EditTaskModal: React.FC<EditTaskModalPropType> = ({
   useEffect(() => {
     getTeamMembersRequest(teamIdOfOpenedProject).then(({ data }) => {
       const teamMemberEmailArr = data.map(({ member_email }) => member_email);
-      console.log(teamMemberEmailArr);
       setTeamMembers(teamMemberEmailArr);
     });
   }, []);
@@ -250,7 +249,6 @@ const AssignedMember: React.FC<{
     <button
       onClick={(e: any) => {
         e.preventDefault();
-        console.log(memberEmail, id);
         handleDeleteMemberEmail(memberEmail, id);
       }}
       onMouseEnter={(e) => {

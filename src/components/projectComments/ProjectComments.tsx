@@ -72,7 +72,6 @@ const ProjectComments: React.FC<ProjectCommentsPropType> = ({ projectID }) => {
   };
 
   const renderProjectComments = (projectComments: any) => {
-    console.log(projectComments);
     return projectComments.map(({ content, owner_email }: any) => {
       const loggedInUserEmail = localStorage.getItem("email");
       return loggedInUserEmail !== owner_email ? (

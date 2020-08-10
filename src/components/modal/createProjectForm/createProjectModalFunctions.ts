@@ -11,7 +11,6 @@ export const handleAddProjectClick = (
   projectDescription: string,
   creator_email: string
 ) => {
-  console.log(teamID);
   postNewProjectsRequest({
     name: projectName,
     description: projectDescription,

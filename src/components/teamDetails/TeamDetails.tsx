@@ -29,7 +29,6 @@ const TeamDetails = () => {
   const [teamMembers, setTeamMembers] = useState<string[]>([]);
   useEffect(() => {
     getTeamRequest(teamID).then(({ data }) => {
-      console.log(data);
       const { name, description } = data;
       setTeamName(name);
       setTeamDescription(description);
@@ -64,7 +63,6 @@ const TeamDetails = () => {
     );
   };
   const renderTeamMembers = (teamMembers: any[]) => {
-    console.log(teamMembers);
     return teamMembers.map((teamMember) => (
       <li className="my-4 text-white">
         <img
