@@ -13,7 +13,6 @@ const ProjectDetailLayout: React.FC<ProjectDetailLayoutProps> = ({
     <>
       <SideBar />
       <NavBar />
-      {/* <div className="pt-12"></div> */}
       <div
         className="bg-customBlue-200 float-left pr-4"
         style={{

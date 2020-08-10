@@ -11,7 +11,7 @@ const NavBar: React.FC = () => {
   };
   return (
     <div
-      className="w-full fixed top-0 left-0 px-4 py-3 bg-transparent text-right"
+      className="w-full fixed top-0 left-0 px-4 py-3 bg-transparent text-right z-50"
       style={{ maxWidth: "1300px" }}
     >
       <button
