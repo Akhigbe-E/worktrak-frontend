@@ -44,8 +44,8 @@ const Dashboard: React.FC = () => {
   );
   const assignedTasks = useSelector((state: RootState) => state.assignedTasks);
 
+  const email = window.localStorage.getItem("email") || "";
   useEffect(() => {
-    const email = window.localStorage.getItem("email") || "";
     getAssignedTasksRequest(email).then(({ data }) => {
       dispatch(setAssignedTasks(data));
       setTasksAreLoading(false);
@@ -72,9 +72,13 @@ const Dashboard: React.FC = () => {
   };
 
   const dashboardCardsData: DashboardCardsData[] = [
+    {
+      title: `PROJECTS YOU CREATED`,
+      value: teamProjects.filter(({ creator_email }) => creator_email === email)
+        .length,
+    },
     { title: `TASKS YOU'RE ASSIGNED TO`, value: teamProjects.length },
-    { title: `TEAM PROJECTS`, value: teamProjects.length },
-    { title: `TASKS YOU'RE ASSIGNED TO`, value: teamProjects.length },
+    { title: `TEAMS YOU'RE IN`, value: Object.values(teams).length },
   ];
   return (
     <div>
