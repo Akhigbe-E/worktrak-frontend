@@ -7,9 +7,7 @@ import { Draggable } from "react-beautiful-dnd";
 import { setCurrentlyOpenedTask } from "../../app/slices/currentlyOpenedTaskSlice";
 import { setIsEditTaskModalOpen } from "../../app/slices/isEditTaskModalOpenSlice";
 import { getAssignedTeamMembersRequest } from "../../util/backendRequests";
-// import AddDueDateIcon from "../../assets/img/addDueDateIcon.svg";
-// import ProfileImage from "../../assets/img/profileImage.svg";
-// import DeleteIcon from "../../assets/img/deleteIcon.svg";
+import AssigneeIcon from "../../assets/images/profileImage.svg";
 
 export interface ProjectTaskPropType {
   id: number;
@@ -58,21 +56,6 @@ export const ProjectTask: React.FC<ProjectTaskPropType> = ({
       let memberEmailArr = data.map(({ member_email }) => member_email);
       setMemberEmails(memberEmailArr);
     });
-
-    // fetch(`${api_url}/assignedmembers/${id}`, {
-    //   method: "GET",
-    //   headers: {
-    //     Authorization: token,
-    //     useremail: email,
-    //   },
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     let memberEmailArr = data.memberEmails.map(
-    //       ({ member_email }) => member_email
-    //     );
-    //     setMemberEmails(memberEmailArr);
-    //   });
   }, []);
 
   return (
@@ -127,11 +110,11 @@ export const ProjectTask: React.FC<ProjectTaskPropType> = ({
               <span className="">
                 {memberEmails.map((assignee, _, arr) => (
                   <img
-                    src={AddAssigneeIcon}
-                    className={`w-5.5 mr-2 bg-gray-300 border inline-block rounded-full ${
+                    src={AssigneeIcon}
+                    alt="assignee"
+                    className={`w-5.5 mr-2 border inline-block rounded-full ${
                       arr.length > 4 && "mb-3"
                     }`}
-                    alt="add assignee"
                   />
                 ))}
               </span>
@@ -145,9 +128,6 @@ export const ProjectTask: React.FC<ProjectTaskPropType> = ({
                 />
               </span>
             )}
-            {/* <span className="ml-1 w-2/5">
-              <img src={AddDueDateIcon} alt="add due date" />
-            </span> */}
           </div>
         </div>
       )}
