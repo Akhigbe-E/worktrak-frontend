@@ -64,8 +64,9 @@ function App() {
     if (!confirm) return;
     deleteProjectRequest(project_id).then((res) => {
       dispatch(deleteOpenProject({ project_id }));
-    });
-    window.location.replace(`${`https://worktrak.herokuapp.com`}/dashboard`);
+    }).then(e => {
+      window.location.replace(`${`https://worktrak.herokuapp.com`}/dashboard`);
+    })
   };
 
   return (
