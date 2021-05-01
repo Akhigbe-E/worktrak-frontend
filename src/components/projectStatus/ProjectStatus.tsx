@@ -83,7 +83,6 @@ const ProjectStatus: React.FC<ProjectStatusPropType> = ({ project }) => {
     setTasksToShow({});
   };
   const renderStatusTasks = (tasks: any, taskStatus: string) => {
-    console.log(tasks);
     return (
       <div className="w-full bg-customBlue-200 border border-gray-600 rounded-lg p-5">
         {/* <span

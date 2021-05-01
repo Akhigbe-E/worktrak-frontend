@@ -78,7 +78,6 @@ const ProjectBoard: React.FC<ProjectBoardPropType> = ({ projectID }) => {
     });
     if (Object.keys(tasksInSections).length === 0) return;
     Object.values(openedProjectTasks).forEach((task) => {
-      console.log(openedProjectTasks);
       const { section_id, id } = task;
       tasksInSections[`${section_id}`] = {
         ...tasksInSections[`${section_id}`],

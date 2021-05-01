@@ -7,7 +7,8 @@ export const isAuthenticated = () => {
   if (!!!token) return false;
 
   const secret = process.env.REACT_APP_SECRET || "";
-  jwt.verify(token, secret, function (err, decoded) {
+  jwt.verify(token, `${secret}`, function (err, decoded) {
+    console.log(secret);
     if (err) {
       window.localStorage.removeItem("token");
       return false;

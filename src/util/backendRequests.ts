@@ -157,7 +157,6 @@ const customFetchPost = async (endpoint: string, body: any) => {
 export const customFetchUpdate = async (endpoint: string, body: any) => {
   const token = window.localStorage.getItem("token") || "";
   const email = window.localStorage.getItem("email") || "";
-  console.log(body);
   return await (
     await fetch(`${HOST}${endpoint}`, {
       method: "PUT",
@@ -287,14 +286,12 @@ export const postNewProjectsRequest = (
 export const postNewSectionRequest = (
   body: NewSectionInputType
 ): Promise<SectionReturnType> => {
-  console.log(body);
   return customFetchPost(`/section`, body);
 };
 
 export const postNewTaskRequest = (
   body: NewTaskInputType
 ): Promise<TaskReturnType> => {
-  console.log(body);
   return customFetchPost(`/task`, body);
 };
 
@@ -302,7 +299,6 @@ export const postAssignMemberToTaskRequest = (body: {
   member_email: string;
   task_id: number;
 }): Promise<TeamMembersReturnType> => {
-  console.log(body);
   return customFetchPost(`/assignmember`, body);
 };
 

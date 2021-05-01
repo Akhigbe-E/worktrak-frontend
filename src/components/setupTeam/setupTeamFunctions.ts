@@ -19,7 +19,6 @@ export const handleSetupTeamButtonClick = (
       }
     })
     .catch((err) => {
-      console.log(err);
       setAlertModal({
         success: false,
         visible: true,

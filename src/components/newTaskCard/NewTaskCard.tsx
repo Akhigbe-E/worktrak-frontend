@@ -27,7 +27,6 @@ const NewTaskCard: React.FC<NewTaskCardPropType> = ({
         project_id: projectID,
         completed: false,
       }).then(({ success, message, data }) => {
-        console.log(success);
         if (!success) {
           dispatch(setAlertModal({ success, visible: true, message }));
           setTimeout(() => {

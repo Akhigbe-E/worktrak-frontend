@@ -15,7 +15,6 @@ export const handleCreateTeamClick = (
   postCreateTeamRequest(teamName, teamDescription).then(
     ({ success, message, data }) => {
       const team = data[0];
-      console.log(team);
       dispatch(addTeam(team));
       dispatch(setIsCreateTeamModalOpen(false));
       postAddTeamMemberRequest(member_email, team.id);
