@@ -65,7 +65,7 @@ function App() {
     deleteProjectRequest(project_id).then((res) => {
       dispatch(deleteOpenProject({ project_id }));
     });
-    window.location.replace(`${`http://localhost:3000`}/dashboard`);
+    window.location.replace(`${`https://worktrak.herokuapp.com`}/dashboard`);
   };
 
   return (
