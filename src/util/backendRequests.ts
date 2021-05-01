@@ -2,7 +2,7 @@ import { TeamsType } from "../components/FirstScreen/FirstScreen";
 import { ProjectType } from "../components/dashboard/Dashboard";
 
 // export const HOST = "http://localhost:3001";
-export const HOST = "https://mighty-island-36447.herokuapp.com/https://worktrak-backend.herokuapp.com";
+export const HOST = "https://worktrak-backend.herokuapp.com";
 
 export interface LoginBodyType {
   email: string;
